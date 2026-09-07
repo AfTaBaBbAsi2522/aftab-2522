@@ -3,400 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Tuba! 🎂✨</title>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
-    
-    <!-- Canvas Confetti Library -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    
-    <!-- FontAwesome Icons -->
+    <title>Happy Birthday Surprise</title>
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0d0614, #2a0845, #12002b, #05010a);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background-color: #0f172a;
             color: #ffffff;
             min-height: 100vh;
-            overflow-x: hidden;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            overflow-x: hidden;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* --- LOCK SCREEN STYLES --- */
+        /* LOCK SCREEN STYLES */
         #lockScreen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(13, 6, 20, 0.96);
-            backdrop-filter: blur(20px);
-            z-index: 9999;
+            background: rgba(15, 23, 42, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            transition: all 0.8s ease-in-out;
+            z-index: 999;
+            transition: opacity 0.8s ease;
         }
 
         .lock-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 40px 30px;
-            border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 105, 180, 0.3);
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 20px;
             text-align: center;
-            max-width: 350px;
-            width: 90%;
-            animation: pulseGlow 3s infinite alternate;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            max-width: 90%;
+            width: 350px;
+            border: 1px solid #334155;
         }
 
         .lock-box i {
-            font-size: 50px;
-            color: #ff69b4;
+            font-size: 40px;
+            color: #ff6b6b;
             margin-bottom: 15px;
-            filter: drop-shadow(0 0 10px #ff69b4);
         }
 
         .lock-box h2 {
-            font-size: 22px;
+            font-size: 20px;
             margin-bottom: 10px;
-            font-weight: 600;
         }
 
         .passcode-input {
             width: 100%;
             padding: 12px;
-            border-radius: 12px;
-            border: 1px solid #ff69b4;
-            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            border: 1px solid #475569;
+            background: #0f172a;
             color: #fff;
-            font-size: 22px;
             text-align: center;
-            letter-spacing: 5px;
+            font-size: 18px;
+            margin: 15px 0;
             outline: none;
-            margin-bottom: 20px;
-            transition: 0.3s;
-        }
-
-        .passcode-input:focus {
-            box-shadow: 0 0 15px #ff69b4;
         }
 
         .unlock-btn {
-            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
+            padding: 12px 25px;
+            border-radius: 10px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 20, 147, 0.4);
-            transition: 0.3s;
             width: 100%;
+            transition: transform 0.2s;
         }
 
-        .unlock-btn:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.7);
+        .unlock-btn:active {
+            transform: scale(0.98);
         }
 
         .error-msg {
-            color: #ff4757;
-            font-size: 13px;
+            color: #ef4444;
+            font-size: 14px;
             margin-top: 10px;
             display: none;
         }
 
-        /* --- MAIN WEBSITE CONTENT --- */
+        /* MAIN SURPRISE CONTENT */
         #mainContent {
             display: none;
-            opacity: 0;
-            width: 100%;
-            max-width: 650px;
-            padding: 20px;
             flex-direction: column;
             align-items: center;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
             text-align: center;
-            z-index: 10;
-            padding-bottom: 80px;
-            animation: fadeIn 1.5s forwards ease-out;
         }
 
-        /* Floating Background Flowers/Hearts */
-        .floating-element {
-            position: fixed;
-            top: -10%;
-            font-size: 24px;
-            user-select: none;
-            pointer-events: none;
-            z-index: 1;
-            animation: fall linear infinite;
+        .photo-container {
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
+        .photo-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 18px;
         }
 
-        /* Header */
-        .title-container {
-            margin-top: 40px;
+        .video-container {
+            margin-bottom: 25px;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        video {
+            width: 100%;
+            display: block;
+            border-radius: 18px;
+        }
+
+        .wish-card {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+            line-height: 1.6;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
             margin-bottom: 25px;
         }
 
-        .main-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 52px;
-            background: linear-gradient(45deg, #ff71ce, #01cdfe, #05ffa1, #fffb96);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glowText 2s ease-in-out infinite alternate;
-        }
-
-        .sub-title {
-            font-size: 15px;
-            color: #e0e0e0;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-top: 5px;
-        }
-
-        /* Music Controls */
-        .music-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 50px;
-            cursor: pointer;
-            z-index: 100;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        /* Photo Frame */
-        .photo-card {
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px solid rgba(255, 105, 180, 0.4);
-            border-radius: 25px;
-            padding: 15px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            margin-bottom: 35px;
-            width: 100%;
-            max-width: 320px;
-            transition: transform 0.4s ease;
-        }
-
-        .photo-card:hover {
-            transform: scale(1.03) rotate(1deg);
-        }
-
-        .photo-frame {
-            width: 100%;
-            height: 330px;
-            border-radius: 18px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Message Box */
-        .message-card {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 30px 25px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            margin-bottom: 40px;
-            line-height: 1.8;
-            font-size: 15px;
-            color: #f1f1f1;
-            text-align: left;
-            position: relative;
-        }
-
-        .message-card::before {
-            content: "“";
-            font-family: 'Playfair Display', serif;
-            font-size: 80px;
-            position: absolute;
-            top: -20px;
-            left: 15px;
-            color: rgba(255, 105, 180, 0.2);
-        }
-
-        /* --- GIFT BOX SECTION --- */
-        .gift-section {
-            margin: 40px 0;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .gift-title {
-            font-size: 18px;
-            color: #ff69b4;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
-
-        .gift-box {
-            font-size: 80px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            animation: bounce 2s infinite;
-            user-select: none;
-            filter: drop-shadow(0 10px 20px rgba(255, 20, 147, 0.5));
-        }
-
-        .gift-box:hover {
-            transform: scale(1.15) rotate(5deg);
-        }
-
-        .gift-reveal {
-            display: none;
-            margin-top: 25px;
-            background: rgba(255, 105, 180, 0.15);
-            border: 1px dashed #ff69b4;
-            padding: 20px;
-            border-radius: 20px;
-            animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .flower-pop {
-            font-size: 60px;
-            animation: floatUp 2s infinite alternate ease-in-out;
-        }
-
-        /* --- EXTRA WISHES CARDS --- */
-        .section-heading {
-            font-size: 24px;
-            font-family: 'Dancing Script', cursive;
-            color: #01cdfe;
-            margin: 30px 0 15px 0;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            width: 100%;
-            margin-bottom: 30px;
-        }
-
-        .mini-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 18px;
-            text-align: left;
-            transition: 0.3s;
-        }
-
-        .mini-card:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
-        }
-
-        .mini-card i {
-            font-size: 24px;
-            color: #ff71ce;
-            margin-bottom: 10px;
-        }
-
-        .mini-card h3 {
-            font-size: 16px;
-            margin-bottom: 5px;
-            color: #fff;
-        }
-
-        .mini-card p {
-            font-size: 13px;
-            color: #ccc;
-            line-height: 1.5;
-        }
-
-        /* Buttons */
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
         .action-btn {
-            background: linear-gradient(45deg, #e056fd, #686de0);
-            border: none;
+            background: #334155;
             color: white;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-size: 14px;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(224, 86, 253, 0.4);
-            transition: 0.3s;
+            font-size: 14px;
         }
 
-        .action-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(224, 86, 253, 0.6);
-        }
-
-        /* Animations */
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 20px rgba(255, 105, 180, 0.2); }
-            100% { box-shadow: 0 0 40px rgba(255, 105, 180, 0.6); }
-        }
-
-        @keyframes glowText {
-            from { filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.5)); }
-            to { filter: drop-shadow(0 0 15px rgba(255, 105, 180, 1)); }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-15px); }
-            60% { transform: translateY(-7px); }
-        }
-
-        @keyframes popUp {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        /* FOOTER / SENDER NAME */
+        .footer-wishes {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ff6b6b;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            padding: 15px;
+            border-top: 1px dashed #334155;
+            width: 100%;
         }
 
         @keyframes floatUp {
@@ -411,90 +195,43 @@
 </head>
 <body>
 
-    <!-- BACKGROUND AUDIO (Happy Birthday Instrumental) -->
-  <!-- LOCK SCREEN -->
+    <!-- LOCK SCREEN -->
     <div id="lockScreen">
         <div class="lock-box">
             <i class="fa-solid fa-gift"></i>
             <h2>Secret Birthday Surprise</h2>
-            <p>MUHTAMRA PASSWORD LAGAYEIN 👀👇:</p>
-            <input type="password" id="passcodeInput" class="passcode-input" placeholder="••••" maxlength="4">
+            <p>MUHTAMRA PASSWORD LAGAYIN 👀👇</p>
+            <input type="password" id="passcodeInput" class="passcode-input" placeholder="****" maxlength="10">
             <button class="unlock-btn" onclick="checkCode()">Open Surprise ✨</button>
-            <div id="errorMsg" class="error-msg">Incorrect Code! Phir se try karein.</div>
+            <div id="errorMsg" class="error-msg">Incorrect Code! Phir se try karein</div>
         </div>
     </div>
 
     <!-- MAIN SURPRISE CONTENT -->
     <div id="mainContent">
-        
-        <div class="title-container">
-            <h1 class="main-title">Happy Birthday Tuba! 🎂❤️</h1>
-            <div class="sub-title">A Very Special Day</div>
+
+        <!-- SPECIAL PHOTO SECTION -->
+        <div class="photo-container">
+            <img src="https://cdn.phototourl.com/free/2026-09-07-db11e7e1-c4b6-4e25-aebc-4ff26bd8b43a.png" alt="Birthday Special Photo">
         </div>
 
-        <!-- PHOTO CONTAINER -->
-        <div class="photo-card">
-            <div class="photo-frame">
-                <!-- PHOTO LINK REPLACEMENT PLACEHOLDER -->
-                <img src="https://cdn.phototourl.com/free/2026-09-07-db11e7e1-c4b6-4e25-aebc-4ff26bd8b43a.png" alt="Tuba's Photo">
-            </div>
-        </div>
-
-        <!-- MAIN MESSAGE CARD -->
-        <div class="message-card">
-            "Happy Birthday Tuba! 🎂❤️ Allah tumhari zindagi ko khushiyon sukoon aur kamyabi se bhar de. Jo bhi tum chahti ho Allah tumhe woh sab naseeb kare. Hamari rahein chahe alag ho gayi hain lekin meri dua hamesha tumhari khushi ke liye rahegi. Apna din enjoy karo aur hamesha khush raho 💖💐...
-        </div> 
-                <!-- AUTO-PLAYING VIDEO SECTION WITH SOUND -->
-        <div style="margin-bottom: 35px; width: 100%; max-width: 450px;">
-            <h3 style="color: #ff69b4; font-size: 18px; margin-bottom: 12px; font-family: 'Poppins', sans-serif;">
-                🎬 Special Video Memory ✨
+        <!-- AUTO-PLAYING VIDEO SECTION WITH SOUND -->
+        <div class="video-container">
+            <h3 style="color: #ff6b6b; font-size: 18px; margin-bottom: 12px; font-family: 'Poppins', sans-serif;">
+                ✨ Special Video Memory ✨
             </h3>
-            <div style="border-radius: 20px; overflow: hidden; border: 2px solid rgba(255, 105, 180, 0.4); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                <video id="specialVideo" controls playsinline style="width: 100%; display: block; border-radius: 18px;">
-                    <source src="https://files.catbox.moe/5fvfig.mp4" type="video/mp4">
-                    Aapka browser video tag support nahi karta.
-                </video>
-            </div>
+            <video id="specialVideo" controls playsinline>
+                <source src="https://files.catbox.moe/5fvfig.mp4" type="video/mp4">
+                Aapka browser video tag support nahi karta.
+            </video>
         </div>
 
-
-        <!-- INTERACTIVE GIFT BOX SECTION -->
-        <div class="gift-section">
-            <div class="gift-title">✨𝙾𝙿𝙴𝙽 𝙸𝚃 𝙿𝚁𝙸𝙽𝙲𝙴𝚂𝚂 👇 ✨</div>
-            <div class="gift-box" onclick="openGift()">🎁</div>
-            
-            <div id="giftReveal" class="gift-reveal">
-                <div class="flower-pop">🌹❤</div>
-                <p style="margin-top: 10px; font-weight: 600; color: #ff69b4;">A Special Red Rose and heart For You!</p>
-                <p style="font-size: 13px; color: #eee; margin-top: 5px;">May your life always bloom with pure happiness & smiles! 🌸</p>
-            </div>
-        </div>
-
-        <!-- EXTRA SURPRISE WISHES -->
-        <div class="section-heading">~ Special Birthday Blessings ~</div>
-        
-        <div class="cards-grid">
-            <div class="mini-card">
-                <i class="fa-solid fa-heart"></i>
-                <h3>Always Smile</h3>
-                <p>Tumhari muskuraahat hamesha aise hi barkaraar rahe. Khushiyan tumhare qadam chumein.</p>
-            </div>
-            
-            <div class="mini-card">
-                <i class="fa-solid fa-star"></i>
-                <h3>Shine Bright</h3>
-                <p>Zindagi ke har mod par tum sitaron ki tarah chamko aur har mqasad mein kamyabi mile.</p>
-            </div>
-
-            <div class="mini-card">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                <𝚑3></𝚑3> 𝙵𝚁𝙾𝙼 𝙷𝙴𝙰𝚁𝚃 4 𝚈𝙾𝚄</h3></h3>
-                <p></p>Happy Birthday Tuba ❤️🎂
-Tumhari zindagi ka ye naya saal tumhare liye bohat saari khushiyan, sukoon aur beautiful moments lekar aaye. ✨
-Bas dil se dua hai ke tum hamesha khush raho, tumhari har genuine wish poori ho aur tumhari smile kabhi kam na ho. 🫶🏻
-No matter what, today is your day… so enjoy it to the fullest. ❤️
-Happy Birthday once again, Tuba. 🎂✨</p>
-            </div>
+        <div class="wish-card">
+            <p>Happy Birthday Tuba! ❤️✨</p>
+            <p>Zindagi ka ye naya saal tumhare liye bohat saari khushiyan, sukoon aur beautiful moments lekar aaye. ✨</p>
+            <p>Ese dua hai ke tum hameha khuch raho, tumhari her genuine wish poori ho aur tumhari inke kabhi kam na ho. 🤲🏻</p>
+            <p>No matter what, today is your day... so enjoy it to the fullest. ❤️</p>
+            <p>Happy Birthday once again, Tuba. 🥳✨</p>
         </div>
 
         <!-- ACTION BUTTONS -->
@@ -502,30 +239,35 @@ Happy Birthday once again, Tuba. 🎂✨</p>
             <button class="action-btn" onclick="triggerFlowerShower()">
                 <i class="fa-solid fa-cloud-showers-heavy"></i> More Flowers Rain 🌸
             </button>
-            <button class="action-btn" style="background: linear-gradient(45deg, #ff71ce, #ff1493);" onclick="triggerFireworks()">
+            <button class="action-btn" style="background: linear-gradient(45deg, #ff6b6b, #ff8e53);" onclick="triggerFireworks()">
                 <i class="fa-solid fa-fireworks"></i> Fireworks Show 🎆
             </button>
+        </div>
+
+        <!-- FOOTER / SENDER CREDIT -->
+        <div class="footer-wishes">
+            WISHES FROM AFTAB AHMAD 🌸💐
         </div>
 
     </div>
 
     <script>
-";
-            }
-        }
-
-        // PASSCODE VERIFICATION
-        function checkCode() 
- {
+        // PASSCODE VERIFICATION & VIDEO AUTOPLAY
+        function checkCode() {
             const input = document.getElementById('passcodeInput').value;
             const errorMsg = document.getElementById('errorMsg');
             const lockScreen = document.getElementById('lockScreen');
             const mainContent = document.getElementById('mainContent');
 
-            if (input === "2522") {
-                // Video autoplay on unlock
-const myVideo = document.getElementById('specialVideo');
-if (myVideo) { myVideo.play(); }
+            // NEW PASSCODE: 0909
+            if (input === "0909") {
+                
+                // Video autoplay with sound on unlock
+                const myVideo = document.getElementById('specialVideo');
+                if (myVideo) {
+                    myVideo.muted = false; // Audio enable
+                    myVideo.play().catch(e => console.log("Autoplay error: ", e));
+                }
 
                 // Hide lock screen
                 lockScreen.style.opacity = '0';
@@ -534,8 +276,8 @@ if (myVideo) { myVideo.play(); }
                     mainContent.style.display = 'flex';
                     
                     // Trigger animations
-                    triggerFlowerShower();
-                    createFloatingFlowers();
+                    if (typeof triggerFlowerShower === "function") triggerFlowerShower();
+                    if (typeof createFloatingFlowers === "function") createFloatingFlowers();
                 }, 800);
             } else {
                 errorMsg.style.display = 'block';
@@ -543,98 +285,24 @@ if (myVideo) { myVideo.play(); }
             }
         }
 
+        // Enter Key Press Listener for Passcode
         document.getElementById('passcodeInput').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 checkCode();
             }
         });
 
-        // GIFT OPEN ANIMATION
-        function openGift() {
-            const giftReveal = document.getElementById('giftReveal');
-            giftReveal.style.display = 'block';
-            
-            // Pop confetti around gift
-            confetti({
-                particleCount: 80,
-                spread: 100,
-                origin: { y: 0.7 }
-            });
-        }
-
-        // CONFETTI AND FLOWER SHOWER
+        // Placeholder Functions for Effects
         function triggerFlowerShower() {
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
-
-            var duration = 3 * 1000;
-            var end = Date.now() + duration;
-
-            (function frame() {
-                confetti({
-                    particleCount: 4,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#ff69b4', '#ff1493', '#00ffff', '#ffffff']
-                });
-                confetti({
-                    particleCount: 4,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#ff69b4', '#ff1493', '#00ffff', '#ffffff']
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            }());
+            console.log("Flower shower triggered!");
         }
 
-        // FIREWORKS ANIMATION
-        function triggerFireworks() {
-            var count = 200;
-            var defaults = {
-                origin: { y: 0.7 }
-            };
-
-            function fire(particleRatio, opts) {
-                confetti(Object.assign({}, defaults, opts, {
-                    particleCount: Math.floor(count * particleRatio)
-                }));
-            }
-
-            fire(0.25, { spread: 26, startVelocity: 55 });
-            fire(0.2, { spread: 60 });
-            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-            fire(0.1, { spread: 120, startVelocity: 45 });
-        }
-
-        // CONTINUOUS BACKGROUND FLOATING FLOWERS & HEARTS
         function createFloatingFlowers() {
-            const icons = ['🌸', '🌺', '💖', '✨', '💐', '🌷', '🎂', '🌹'];
-            const container = document.body;
+            console.log("Floating flowers created!");
+        }
 
-            setInterval(() => {
-                const element = document.createElement('div');
-                element.classList.add('floating-element');
-                element.innerText = icons[Math.floor(Math.random() * icons.length)];
-                
-                element.style.left = Math.random() * 100 + 'vw';
-                element.style.animationDuration = Math.random() * 3 + 4 + 's';
-                element.style.fontSize = Math.random() * 15 + 18 + 'px';
-
-                container.appendChild(element);
-
-                setTimeout(() => {
-                    element.remove();
-                }, 7000);
-            }, 300);
+        function triggerFireworks() {
+            console.log("Fireworks triggered!");
         }
     </script>
 </body>
