@@ -23,14 +23,21 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0d0614, #2a0845, #12002b);
+            background: linear-gradient(135deg, #0d0614, #2a0845, #12002b, #05010a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* --- LOCK SCREEN STYLES --- */
@@ -40,8 +47,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(13, 6, 20, 0.95);
-            backdrop-filter: blur(15px);
+            background: rgba(13, 6, 20, 0.96);
+            backdrop-filter: blur(20px);
             z-index: 9999;
             display: flex;
             justify-content: center;
@@ -55,7 +62,7 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 40px 30px;
             border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 105, 180, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 105, 180, 0.3);
             text-align: center;
             max-width: 350px;
             width: 90%;
@@ -63,7 +70,7 @@
         }
 
         .lock-box i {
-            font-size: 45px;
+            font-size: 50px;
             color: #ff69b4;
             margin-bottom: 15px;
             filter: drop-shadow(0 0 10px #ff69b4);
@@ -73,13 +80,6 @@
             font-size: 22px;
             margin-bottom: 10px;
             font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .lock-box p {
-            font-size: 13px;
-            color: #cccccc;
-            margin-bottom: 20px;
         }
 
         .passcode-input {
@@ -87,9 +87,9 @@
             padding: 12px;
             border-radius: 12px;
             border: 1px solid #ff69b4;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
             color: #fff;
-            font-size: 20px;
+            font-size: 22px;
             text-align: center;
             letter-spacing: 5px;
             outline: none;
@@ -116,13 +116,13 @@
         }
 
         .unlock-btn:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6);
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.7);
         }
 
         .error-msg {
             color: #ff4757;
-            font-size: 12px;
+            font-size: 13px;
             margin-top: 10px;
             display: none;
         }
@@ -132,13 +132,13 @@
             display: none;
             opacity: 0;
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
             padding: 20px;
             flex-direction: column;
             align-items: center;
             text-align: center;
             z-index: 10;
-            margin-y: 40px;
+            padding-bottom: 80px;
             animation: fadeIn 1.5s forwards ease-out;
         }
 
@@ -154,51 +154,64 @@
         }
 
         @keyframes fall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(105vh) rotate(360deg);
-                opacity: 0.2;
-            }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
         }
 
-        /* Header Animation */
+        /* Header */
         .title-container {
-            margin-top: 30px;
+            margin-top: 40px;
             margin-bottom: 25px;
         }
 
         .main-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 48px;
+            font-size: 52px;
             background: linear-gradient(45deg, #ff71ce, #01cdfe, #05ffa1, #fffb96);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: glowText 2s ease-in-out infinite alternate;
-            margin-bottom: 5px;
         }
 
         .sub-title {
-            font-size: 16px;
+            font-size: 15px;
             color: #e0e0e0;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        /* Music Controls */
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 100;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         /* Photo Frame */
         .photo-card {
             background: rgba(255, 255, 255, 0.08);
-            border: 2px solid rgba(255, 105, 180, 0.3);
+            border: 2px solid rgba(255, 105, 180, 0.4);
             border-radius: 25px;
             padding: 15px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             width: 100%;
             max-width: 320px;
-            position: relative;
             transition: transform 0.4s ease;
         }
 
@@ -208,35 +221,16 @@
 
         .photo-frame {
             width: 100%;
-            height: 320px;
+            height: 330px;
             border-radius: 18px;
             overflow: hidden;
             background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px dashed rgba(255, 255, 255, 0.2);
-            position: relative;
         }
 
         .photo-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 18px;
-        }
-
-        .photo-placeholder {
-            color: #aaa;
-            font-size: 13px;
-            padding: 15px;
-        }
-
-        .photo-placeholder i {
-            font-size: 35px;
-            color: #ff69b4;
-            margin-bottom: 10px;
-            display: block;
         }
 
         /* Message Box */
@@ -247,12 +241,12 @@
             padding: 30px 25px;
             backdrop-filter: blur(12px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            position: relative;
             margin-bottom: 40px;
             line-height: 1.8;
             font-size: 15px;
             color: #f1f1f1;
             text-align: left;
+            position: relative;
         }
 
         .message-card::before {
@@ -265,7 +259,108 @@
             color: rgba(255, 105, 180, 0.2);
         }
 
-        .special-btn {
+        /* --- GIFT BOX SECTION --- */
+        .gift-section {
+            margin: 40px 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gift-title {
+            font-size: 18px;
+            color: #ff69b4;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .gift-box {
+            font-size: 80px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            animation: bounce 2s infinite;
+            user-select: none;
+            filter: drop-shadow(0 10px 20px rgba(255, 20, 147, 0.5));
+        }
+
+        .gift-box:hover {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .gift-reveal {
+            display: none;
+            margin-top: 25px;
+            background: rgba(255, 105, 180, 0.15);
+            border: 1px dashed #ff69b4;
+            padding: 20px;
+            border-radius: 20px;
+            animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .flower-pop {
+            font-size: 60px;
+            animation: floatUp 2s infinite alternate ease-in-out;
+        }
+
+        /* --- EXTRA WISHES CARDS --- */
+        .section-heading {
+            font-size: 24px;
+            font-family: 'Dancing Script', cursive;
+            color: #01cdfe;
+            margin: 30px 0 15px 0;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .mini-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 18px;
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .mini-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .mini-card i {
+            font-size: 24px;
+            color: #ff71ce;
+            margin-bottom: 10px;
+        }
+
+        .mini-card h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .mini-card p {
+            font-size: 13px;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .action-btn {
             background: linear-gradient(45deg, #e056fd, #686de0);
             border: none;
             color: white;
@@ -275,10 +370,9 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(224, 86, 253, 0.4);
             transition: 0.3s;
-            margin-bottom: 30px;
         }
 
-        .special-btn:hover {
+        .action-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(224, 86, 253, 0.6);
         }
@@ -294,6 +388,22 @@
             to { filter: drop-shadow(0 0 15px rgba(255, 105, 180, 1)); }
         }
 
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        @keyframes popUp {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
         @keyframes fadeIn {
             to { opacity: 1; }
         }
@@ -301,10 +411,19 @@
 </head>
 <body>
 
+    <!-- BACKGROUND AUDIO (Happy Birthday Instrumental) -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73b22.mp3?filename=happy-birthday-155271.mp3" type="audio/mpeg">
+    </audio>
+
+    <button class="music-btn" onclick="toggleMusic()">
+        <i class="fa-solid fa-music" id="musicIcon"></i> <span id="musicText">Play Music</span>
+    </button>
+
     <!-- LOCK SCREEN -->
     <div id="lockScreen">
         <div class="lock-box">
-            <i class="fa-solid fa-lock"></i>
+            <i class="fa-solid fa-gift"></i>
             <h2>Secret Birthday Surprise</h2>
             <p>Passcode enter karein surprise unlock karne ke liye:</p>
             <input type="password" id="passcodeInput" class="passcode-input" placeholder="••••" maxlength="4">
@@ -324,26 +443,77 @@
         <!-- PHOTO CONTAINER -->
         <div class="photo-card">
             <div class="photo-frame">
-                <!-- PHOTO LINK YAHAN REPLACE KAREIN: src="YOUR_IMAGE_URL_HERE" -->
+                <!-- PHOTO LINK REPLACEMENT PLACEHOLDER -->
                 <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?q=80&w=600&auto=format&fit=crop" alt="Tuba's Photo">
-                
-                <!-- Jab aap pic ka link lagayenge to upar wali image tag use karein -->
             </div>
         </div>
 
-        <!-- MESSAGE CARD -->
+        <!-- MAIN MESSAGE CARD -->
         <div class="message-card">
             "Happy Birthday Tuba! 🎂❤️ Allah tumhari zindagi ko khushiyon sukoon aur kamyabi se bhar de. Jo bhi tum chahti ho Allah tumhe woh sab naseeb kare. Hamari rahein chahe alag ho gayi hain lekin meri dua hamesha tumhari khushi ke liye rahegi. Apna din enjoy karo aur hamesha khush raho 💖💐...
         </div>
 
-        <!-- RE-TRIGGER FLOWERS BUTTON -->
-        <button class="special-btn" onclick="triggerFlowerShower()">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> More Flowers & Confetti 🌸
-        </button>
+        <!-- INTERACTIVE GIFT BOX SECTION -->
+        <div class="gift-section">
+            <div class="gift-title">✨ Tap on the gift box to open your surprise! ✨</div>
+            <div class="gift-box" onclick="openGift()">🎁</div>
+            
+            <div id="giftReveal" class="gift-reveal">
+                <div class="flower-pop">🌹✨</div>
+                <p style="margin-top: 10px; font-weight: 600; color: #ff69b4;">A Special Red Rose For You!</p>
+                <p style="font-size: 13px; color: #eee; margin-top: 5px;">May your life always bloom with pure happiness & smiles! 🌸</p>
+            </div>
+        </div>
+
+        <!-- EXTRA SURPRISE WISHES -->
+        <div class="section-heading">~ Special Birthday Blessings ~</div>
+        
+        <div class="cards-grid">
+            <div class="mini-card">
+                <i class="fa-solid fa-heart"></i>
+                <h3>Always Smile</h3>
+                <p>Tumhari muskuraahat hamesha aise hi barkaraar rahe. Khushiyan tumhare qadam chumein.</p>
+            </div>
+            
+            <div class="mini-card">
+                <i class="fa-solid fa-star"></i>
+                <h3>Shine Bright</h3>
+                <p>Zindagi ke har mod par tum sitaron ki tarah chamko aur har mqasad mein kamyabi mile.</p>
+            </div>
+
+            <div class="mini-card">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h3>Peace & Peace</h3>
+                <p>Dil ko sukoon aur rozmarrah ki zindagi mein hamesha aasanian naseeb hon.</p>
+            </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="btn-group">
+            <button class="action-btn" onclick="triggerFlowerShower()">
+                <i class="fa-solid fa-cloud-showers-heavy"></i> More Flowers Rain 🌸
+            </button>
+            <button class="action-btn" style="background: linear-gradient(45deg, #ff71ce, #ff1493);" onclick="triggerFireworks()">
+                <i class="fa-solid fa-fireworks"></i> Fireworks Show 🎆
+            </button>
+        </div>
 
     </div>
 
     <script>
+        const music = document.getElementById('bgMusic');
+
+        function toggleMusic() {
+            const musicText = document.getElementById('musicText');
+            if (music.paused) {
+                music.play();
+                musicText.innerText = "Pause Music";
+            } else {
+                music.pause();
+                musicText.innerText = "Play Music";
+            }
+        }
+
         // PASSCODE VERIFICATION
         function checkCode() {
             const input = document.getElementById('passcodeInput').value;
@@ -352,6 +522,11 @@
             const mainContent = document.getElementById('mainContent');
 
             if (input === "2522") {
+                // Play music on unlock
+                music.play().then(() => {
+                    document.getElementById('musicText').innerText = "Pause Music";
+                }).catch(() => {});
+
                 // Hide lock screen
                 lockScreen.style.opacity = '0';
                 setTimeout(() => {
@@ -368,36 +543,46 @@
             }
         }
 
-        // Enter key support for input
         document.getElementById('passcodeInput').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 checkCode();
             }
         });
 
+        // GIFT OPEN ANIMATION
+        function openGift() {
+            const giftReveal = document.getElementById('giftReveal');
+            giftReveal.style.display = 'block';
+            
+            // Pop confetti around gift
+            confetti({
+                particleCount: 80,
+                spread: 100,
+                origin: { y: 0.7 }
+            });
+        }
+
         // CONFETTI AND FLOWER SHOWER
         function triggerFlowerShower() {
-            // Standard Confetti
             confetti({
                 particleCount: 100,
                 spread: 70,
                 origin: { y: 0.6 }
             });
 
-            // Flowers/Hearts Rain Animation
             var duration = 3 * 1000;
             var end = Date.now() + duration;
 
             (function frame() {
                 confetti({
-                    particleCount: 3,
+                    particleCount: 4,
                     angle: 60,
                     spread: 55,
                     origin: { x: 0 },
                     colors: ['#ff69b4', '#ff1493', '#00ffff', '#ffffff']
                 });
                 confetti({
-                    particleCount: 3,
+                    particleCount: 4,
                     angle: 120,
                     spread: 55,
                     origin: { x: 1 },
@@ -410,9 +595,29 @@
             }());
         }
 
+        // FIREWORKS ANIMATION
+        function triggerFireworks() {
+            var count = 200;
+            var defaults = {
+                origin: { y: 0.7 }
+            };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            fire(0.25, { spread: 26, startVelocity: 55 });
+            fire(0.2, { spread: 60 });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45 });
+        }
+
         // CONTINUOUS BACKGROUND FLOATING FLOWERS & HEARTS
         function createFloatingFlowers() {
-            const icons = ['🌸', '🌺', '💖', '✨', '💐', '🌷', '🎂'];
+            const icons = ['🌸', '🌺', '💖', '✨', '💐', '🌷', '🎂', '🌹'];
             const container = document.body;
 
             setInterval(() => {
@@ -421,7 +626,7 @@
                 element.innerText = icons[Math.floor(Math.random() * icons.length)];
                 
                 element.style.left = Math.random() * 100 + 'vw';
-                element.style.animationDuration = Math.random() * 3 + 4 + 's'; // 4-7 seconds
+                element.style.animationDuration = Math.random() * 3 + 4 + 's';
                 element.style.fontSize = Math.random() * 15 + 18 + 'px';
 
                 container.appendChild(element);
