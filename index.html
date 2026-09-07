@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Birthday Tuba ❤️</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Three.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
@@ -311,6 +314,7 @@
             justify-content: center;
             cursor: pointer;
             backdrop-filter: blur(4px);
+            z-index: 5;
         }
 
         .memories-scroll {
@@ -479,12 +483,15 @@
 </head>
 <body>
 
+    <!-- 3D Background Canvas -->
     <canvas id="bg-canvas"></canvas>
 
+    <!-- Balloon Layer -->
     <div id="balloon-container"></div>
 
     <div class="container">
 
+        <!-- 0. 3D HEART LOCK SCREEN (PIN: 0909) -->
         <div id="screen-lock" class="screen active">
             <div class="lock-card">
                 <div class="heart-3d-lock">🔒❤️</div>
@@ -503,6 +510,7 @@
             </div>
         </div>
 
+        <!-- 1. GRAND CELEBRATION & BIRTHDAY REVEAL -->
         <div id="screen-1" class="screen">
             <h1 class="grand-title">HAPPY BIRTHDAY TUBA 🌸💖</h1>
             <div class="glass-card">
@@ -514,6 +522,7 @@
             <button id="btn-screen-1" class="btn-glow fade-line" onclick="nextScreen(2)">Your surprise awaits ❤️</button>
         </div>
 
+        <!-- 2. INTERACTIVE UNLOCK SCREEN -->
         <div id="screen-2" class="screen">
             <h2>Hey Tuba…</h2>
             <p>I made something more for you ❤️</p>
@@ -523,6 +532,7 @@
             <p id="tap-hint" style="font-size: 0.85rem; color: #ff8fa3;">Tap 5 times to unlock</p>
         </div>
 
+        <!-- POETRY INTERLUDE 1 -->
         <div id="poetry-1" class="screen">
             <div class="poetry-box">
                 <p class="fade-line">“Kuch log bichar kar bhi…”</p>
@@ -531,6 +541,7 @@
             <button class="btn-glow" onclick="nextScreen('screen-3')">Continue ✨</button>
         </div>
 
+        <!-- 3. MYSTERY GIFT -->
         <div id="screen-3" class="screen">
             <h2>A Little Surprise 🎁</h2>
             <p>Pick a gift box to open your memory...</p>
@@ -542,10 +553,11 @@
             <p id="gift-status" style="margin-top: 20px; opacity: 0; color: #ffb3c1;">You found it… but there’s still more. ❤️</p>
         </div>
 
+        <!-- 4. CINEMATIC VIDEO -->
         <div id="screen-4" class="screen">
             <h2>Special Moments 🎥</h2>
             <div class="video-wrapper">
-                <video id="birthday-video" controls playsinline preload="metadata">
+                <video id="birthday-video" controls playsinline webkit-playsinline preload="auto">
                     <source src="https://files.catbox.moe/5fvfig.mp4" type="video/mp4">
                     Your browser does not support video playback.
                 </video>
@@ -556,6 +568,7 @@
             <button class="btn-glow" style="margin-top:20px;" onclick="nextScreen('poetry-2')">Continue ❤️</button>
         </div>
 
+        <!-- POETRY INTERLUDE 2 -->
         <div id="poetry-2" class="screen">
             <div class="poetry-box">
                 <p class="fade-line">“Kuch yaadein waqt ke saath…”</p>
@@ -564,6 +577,7 @@
             <button class="btn-glow" onclick="nextScreen('screen-5')">Our Memories ✨</button>
         </div>
 
+        <!-- 5. OUR MEMORIES -->
         <div id="screen-5" class="screen">
             <h2>Our Memories 📸</h2>
             <div class="memories-scroll">
@@ -599,6 +613,7 @@
             <button class="btn-glow" onclick="nextScreen('poetry-3')">Next Chapter ✨</button>
         </div>
 
+        <!-- POETRY INTERLUDE 3 -->
         <div id="poetry-3" class="screen">
             <div class="poetry-box">
                 <p class="fade-line">“Faaslay chahe jitne bhi hon…”</p>
@@ -607,6 +622,7 @@
             <button class="btn-glow" onclick="nextScreen('screen-7')">Read Letter ✉️</button>
         </div>
 
+        <!-- 7. LOVE LETTER -->
         <div id="screen-7" class="screen">
             <div class="envelope" onclick="openLetter(this)">
                 <h2 id="env-title">A letter for Tuba ❤️</h2>
@@ -628,6 +644,7 @@
             <button class="btn-glow" style="margin-top:20px;" onclick="nextScreen('poetry-4')">Continue ✨</button>
         </div>
 
+        <!-- POETRY INTERLUDE 4 -->
         <div id="poetry-4" class="screen">
             <div class="poetry-box">
                 <p class="fade-line">“Tum meri zindagi ka…”</p>
@@ -636,6 +653,7 @@
             <button class="btn-glow" onclick="nextScreen('screen-8')">Discover More ❤️</button>
         </div>
 
+        <!-- 8. THINGS I NEVER SAID -->
         <div id="screen-8" class="screen">
             <h2>Things I Never Said</h2>
             <p style="font-size:0.8rem; color:#aaa;">Tap cards to flip</p>
@@ -668,6 +686,7 @@
             <button class="btn-glow" style="margin-top:25px;" onclick="nextScreen('poetry-5')">Next ❤️</button>
         </div>
 
+        <!-- POETRY INTERLUDE 5 -->
         <div id="poetry-5" class="screen">
             <div class="poetry-box">
                 <p class="fade-line">“Aur shayad hamesha…”</p>
@@ -676,12 +695,14 @@
             <button class="btn-glow" onclick="nextScreen('screen-9')">Cut Birthday Cake 🎂</button>
         </div>
 
+        <!-- 9. INTERACTIVE BIRTHDAY CAKE -->
         <div id="screen-9" class="screen">
             <h2>Celebrate Tuba 🎂</h2>
             <div id="cake-emoji" class="cake-container">🎂</div>
             <button class="btn-glow" onclick="cutCake()">Cut Cake 🔪</button>
         </div>
 
+        <!-- 10. VIRTUAL ROSE -->
         <div id="screen-10" class="screen">
             <h2>This one is for you…</h2>
             <div id="rose-btn" class="rose-icon" onclick="bloomRose()">🌹</div>
@@ -691,6 +712,7 @@
             <button id="rose-next" class="btn-glow" style="display:none; margin-top:20px;" onclick="nextScreen('screen-11')">Final Ending ✨</button>
         </div>
 
+        <!-- 11. FINAL CINEMATIC 3D ENDING -->
         <div id="screen-11" class="screen">
             <p style="letter-spacing: 2px; color: #ff8fa3;">WISHES FROM</p>
             <div class="metallic-text">AFTAB ❤️</div>
@@ -700,6 +722,7 @@
 
     </div>
 
+    <!-- MAIN JAVASCRIPT CODE -->
     <script>
         /* THREE.JS BACKGROUND FIREWORKS & PETALS */
         let scene, camera, renderer, fireworks = [], stars, petals = [];
@@ -942,12 +965,23 @@
             }, 1500);
         }
 
-        /* VIDEO PLAYER CONTROLS */
+        /* FIXED VIDEO PLAYER CONTROLS */
         function playVideo() {
             const video = document.getElementById('birthday-video');
             const overlay = document.getElementById('video-overlay');
-            video.play();
-            overlay.style.display = 'none';
+            
+            video.load();
+            let playPromise = video.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    overlay.style.display = 'none';
+                }).catch(error => {
+                    console.log("Autoplay was prevented, allowing manual play controls.");
+                    overlay.style.display = 'none';
+                    video.controls = true;
+                });
+            }
         }
 
         /* LOVE LETTER ENVELOPE */
