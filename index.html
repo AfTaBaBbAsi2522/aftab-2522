@@ -412,15 +412,7 @@
 <body>
 
     <!-- BACKGROUND AUDIO (Happy Birthday Instrumental) -->
-    <audio id="bgMusic" loop preload="auto">
-        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73b22.mp3?filename=happy-birthday-155271.mp3" type="audio/mpeg">
-    </audio>
-
-    <button class="music-btn" onclick="toggleMusic()">
-        <i class="fa-solid fa-music" id="musicIcon"></i> <span id="musicText">Play Music</span>
-    </button>
-
-    <!-- LOCK SCREEN -->
+  <!-- LOCK SCREEN -->
     <div id="lockScreen">
         <div class="lock-box">
             <i class="fa-solid fa-gift"></i>
@@ -451,7 +443,20 @@
         <!-- MAIN MESSAGE CARD -->
         <div class="message-card">
             "Happy Birthday Tuba! 🎂❤️ Allah tumhari zindagi ko khushiyon sukoon aur kamyabi se bhar de. Jo bhi tum chahti ho Allah tumhe woh sab naseeb kare. Hamari rahein chahe alag ho gayi hain lekin meri dua hamesha tumhari khushi ke liye rahegi. Apna din enjoy karo aur hamesha khush raho 💖💐...
+        </div> 
+                <!-- AUTO-PLAYING VIDEO SECTION WITH SOUND -->
+        <div style="margin-bottom: 35px; width: 100%; max-width: 450px;">
+            <h3 style="color: #ff69b4; font-size: 18px; margin-bottom: 12px; font-family: 'Poppins', sans-serif;">
+                🎬 Special Video Memory ✨
+            </h3>
+            <div style="border-radius: 20px; overflow: hidden; border: 2px solid rgba(255, 105, 180, 0.4); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                <video id="specialVideo" controls playsinline style="width: 100%; display: block; border-radius: 18px;">
+                    <source src="https://files.catbox.moe/5fvfig.mp4" type="video/mp4">
+                    Aapka browser video tag support nahi karta.
+                </video>
+            </div>
         </div>
+
 
         <!-- INTERACTIVE GIFT BOX SECTION -->
         <div class="gift-section">
@@ -459,8 +464,8 @@
             <div class="gift-box" onclick="openGift()">🎁</div>
             
             <div id="giftReveal" class="gift-reveal">
-                <div class="flower-pop">💐🌸</div>
-                <p style="margin-top: 10px; font-weight: 600; color: #ff69b4;">A Special Red Rose For You!</p>
+                <div class="flower-pop">🌹❤</div>
+                <p style="margin-top: 10px; font-weight: 600; color: #ff69b4;">A Special Red Rose and heart For You!</p>
                 <p style="font-size: 13px; color: #eee; margin-top: 5px;">May your life always bloom with pure happiness & smiles! 🌸</p>
             </div>
         </div>
@@ -505,31 +510,22 @@ Happy Birthday once again, Tuba. 🎂✨</p>
     </div>
 
     <script>
-        const music = document.getElementById('bgMusic');
-
-        function toggleMusic() {
-            const musicText = document.getElementById('musicText');
-            if (music.paused) {
-                music.play();
-                musicText.innerText = "Pause Music";
-            } else {
-                music.pause();
-                musicText.innerText = "Play Music";
+";
             }
         }
 
         // PASSCODE VERIFICATION
-        function checkCode() {
+        function checkCode() 
+ {
             const input = document.getElementById('passcodeInput').value;
             const errorMsg = document.getElementById('errorMsg');
             const lockScreen = document.getElementById('lockScreen');
             const mainContent = document.getElementById('mainContent');
 
             if (input === "2522") {
-                // Play music on unlock
-                music.play().then(() => {
-                    document.getElementById('musicText').innerText = "Pause Music";
-                }).catch(() => {});
+                // Video autoplay on unlock
+const myVideo = document.getElementById('specialVideo');
+if (myVideo) { myVideo.play(); }
 
                 // Hide lock screen
                 lockScreen.style.opacity = '0';
