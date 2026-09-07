@@ -1,6 +1,135 @@
-<html>
-<style>
-   div{min-height:1em;}
-</style>
-<body>&lt;!DOCTYPE html&gt;<br/>&lt;html lang=&quot;en&quot;&gt;<br/>&lt;head&gt;<br/>    &lt;meta charset=&quot;UTF-8&quot;&gt;<br/>    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;<br/>    &lt;title&gt;Happy Birthday, Special One ✨&lt;/title&gt;<br/>    &lt;!-- Google Fonts --&gt;<br/>    &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;<br/>    &lt;!-- Tailwind CSS for modern layout primitives --&gt;<br/>    &lt;script src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;<br/>    &lt;script&gt;<br/>        tailwind.config = {<br/>            theme: {<br/>                extend: {<br/>                    fontFamily: {<br/>                        sans: [&#39;Plus Jakarta Sans&#39;, &#39;sans-serif&#39;],<br/>                        serif: [&#39;Playfair Display&#39;, &#39;serif&#39;],<br/>                    },<br/>                    colors: {<br/>                        darkBg: &#39;#09090b&#39;,<br/>                        cardBg: &#39;#121217&#39;,<br/>                        accentPink: &#39;#ec4899&#39;,<br/>                        accentPurple: &#39;#8b5cf6&#39;,<br/>                    }<br/>                }<br/>            }<br/>        }<br/>    &lt;/script&gt;<br/>    &lt;!-- Canvas Confetti for celebrations --&gt;<br/>    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js&quot;&gt;&lt;/script&gt;<br/>    &lt;style&gt;<br/>        body {<br/>            background-color: #09090b;<br/>            color: #f4f4f5;<br/>            overflow-x: hidden;<br/>            font-family: &#39;Plus Jakarta Sans&#39;, sans-serif;<br/>        }<br/><br/>        /* Glassmorphism Classes */<br/>        .glass-panel {<br/>            background: rgba(18, 18, 23, 0.7);<br/>            backdrop-filter: blur(16px);<br/>            -webkit-backdrop-filter: blur(16px);<br/>            border: 1px solid rgba(255, 255, 255, 0.08);<br/>        }<br/><br/>        .glass-card {<br/>            background: rgba(255, 255, 255, 0.03);<br/>            backdrop-filter: blur(12px);<br/>            border: 1px solid rgba(255, 255, 255, 0.06);<br/>            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);<br/>        }<br/><br/>        .glass-card:hover {<br/>            border-color: rgba(236, 72, 153, 0.3);<br/>            transform: translateY(-2px);<br/>        }<br/><br/>        /* Glow Animations */<br/>        @keyframes floatGlow {<br/>            0%, 100% { transform: translateY(0px) scale(1); opacity: 0.5; }<br/>            50% { transform: translateY(-20px) scale(1.05); opacity: 0.8; }<br/>        }<br/><br/>        .glow-orb {<br/>            position: absolute;<br/>            border-radius: 50%;<br/>            filter: blur(80px);<br/>            z-index: -1;<br/>            animation: floatGlow 8s ease-in-out infinite;<br/>        }<br/><br/>        /* Custom Scrollbar */<br/>        ::-webkit-scrollbar {<br/>            width: 8px;<br/>        }<br/>        ::-webkit-scrollbar-track {<br/>            background: #09090b;<br/>        }<br/>        ::-webkit-scrollbar-thumb {<br/>            background: #27272a;<br/>            border-radius: 4px;<br/>        }<br/>        ::-webkit-scrollbar-thumb:hover {<br/>            background: #3f3f46;<br/>        }<br/><br/>        /* Section transition states */<br/>        .page-section {<br/>            display: none;<br/>            opacity: 0;<br/>            transition: opacity 0.6s ease-in-out;<br/>        }<br/>        .page-section.active {<br/>            display: block;<br/>            opacity: 1;<br/>        }<br/>    &lt;/style&gt;<br/>&lt;/head&gt;<br/>&lt;body class=&quot;min-h-screen relative selection:bg-pink-500 selection:text-white&quot;&gt;<br/><br/>    &lt;!-- Ambient Glow Background Orbs --&gt;<br/>    &lt;div class=&quot;glow-orb w-96 h-96 bg-pink-600/20 top-[-10%] left-[-10%]&quot;&gt;&lt;/div&gt;<br/>    &lt;div class=&quot;glow-orb w-96 h-96 bg-purple-600/20 bottom-[-10%] right-[-10%]&quot; style=&quot;animation-delay: -4s;&quot;&gt;&lt;/div&gt;<br/><br/>    &lt;!-- Background Audio Element --&gt;<br/>    &lt;audio id=&quot;bgMusic&quot; loop&gt;<br/>        &lt;!-- Replace source with any preferred soft background instrumental URL --&gt;<br/>        &lt;source src=&quot;https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=gentle-piano-ambient-111195.mp3&quot; type=&quot;audio/mpeg&quot;&gt;<br/>    &lt;/audio&gt;<br/><br/>    &lt;!-- Floating Audio Control Widget --&gt;<br/>    &lt;div class=&quot;fixed top-6 right-6 z-50&quot;&gt;<br/>        &lt;button id=&quot;audioToggle&quot; class=&quot;glass-panel px-4 py-2 rounded-full text-xs font-medium flex items-center gap-2 hover:bg-white/10 transition-all text-zinc-300&quot;&gt;<br/>            &lt;span id=&quot;audioIcon&quot;&gt;🔇&lt;/span&gt;<br/>            &lt;span id=&quot;audioText&quot;&gt;Soundtrack: Off&lt;/span&gt;<br/>        &lt;/button&gt;<br/>    &lt;/div&gt;<br/><br/>    &lt;!-- ================= PAGE 1: ENTRY / LOCK SCREEN ================= --&gt;<br/>    &lt;section id=&quot;sec-entry&quot; class=&quot;page-section active min-h-screen flex items-center justify-center p-4&quot;&gt;<br/>        &lt;div class=&quot;glass-panel p-8 sm:p-12 rounded-3xl max-w-md w-full text-center relative overflow-hidden shadow-2xl&quot;&gt;<br/>            &lt;div class=&quot;absolute inset-0 bg-gradient-to-br from-pink-500/10 via-transparent to-purple-500/10 pointer-events-none&quot;&gt;&lt;/div&gt;<br/>            <br/>            &lt;div class=&quot;w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center shadow-lg shadow-pink-500/30 animate-pulse&quot;&gt;<br/>                &lt;svg class=&quot;w-8 h-8 text-white&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;<br/>                    &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z&quot;&gt;&lt;/path&gt;<br/>                &lt;/svg&gt;<br/>            &lt;/div&gt;<br/><br/>            &lt;span class=&quot;text-xs uppercase tracking-widest text-pink-400 font-semibold mb-2 block&quot;&gt;Special Delivery&lt;/span&gt;<br/>            &lt;h1 class=&quot;text-3xl sm:text-4xl font-serif font-bold tracking-tight mb-3 text-white&quot;&gt;For Someone Extraordinary&lt;/h1&gt;<br/>            &lt;p class=&quot;text-zinc-400 text-sm mb-8 leading-relaxed&quot;&gt;A tiny corner of the internet built entirely to celebrate you today.&lt;/p&gt;<br/><br/>            &lt;button onclick=&quot;unlockExperience()&quot; class=&quot;w-full py-4 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all&quot;&gt;<br/>                Open Your Experience ✨<br/>            &lt;/button&gt;<br/>        &lt;/div&gt;<br/>    &lt;/section&gt;<br/><br/>    &lt;!-- ================= PAGE 2: MAIN DASHBOARD &amp; TABS ================= --&gt;<br/>    &lt;section id=&quot;sec-dashboard&quot; class=&quot;page-section min-h-screen pb-20 pt-12 px-4 sm:px-8 max-w-5xl mx-auto&quot;&gt;<br/>        <br/>        &lt;!-- Header Welcome --&gt;<br/>        &lt;div class=&quot;text-center mb-10&quot;&gt;<br/>            &lt;span class=&quot;inline-block px-3 py-1 rounded-full text-xs font-medium bg-pink-500/10 text-pink-400 border border-pink-500/20 mb-3&quot;&gt;Happy Birthday 🎉&lt;/span&gt;<br/>            &lt;h2 class=&quot;text-4xl sm:text-5xl font-serif font-bold text-white mb-2&quot;&gt;To My Absolute Favorite Person&lt;/h2&gt;<br/>            &lt;p class=&quot;text-zinc-400 text-sm max-w-md mx-auto&quot;&gt;Explore your memories, flip through notes, and discover what makes you so special.&lt;/p&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;!-- Navigation Tabs --&gt;<br/>        &lt;div class=&quot;flex flex-wrap justify-center gap-2 mb-10&quot;&gt;<br/>            &lt;button onclick=&quot;switchTab(&#39;letter&#39;)&quot; id=&quot;tab-letter&quot; class=&quot;tab-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all bg-pink-500 text-white shadow-lg shadow-pink-500/20&quot;&gt;The Note&lt;/button&gt;<br/>            &lt;button onclick=&quot;switchTab(&#39;timeline&#39;)&quot; id=&quot;tab-timeline&quot; class=&quot;tab-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all glass-panel text-zinc-400 hover:text-white&quot;&gt;Timeline&lt;/button&gt;<br/>            &lt;button onclick=&quot;switchTab(&#39;reasons&#39;)&quot; id=&quot;tab-reasons&quot; class=&quot;tab-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all glass-panel text-zinc-400 hover:text-white&quot;&gt;Why You&#39;re Amazing&lt;/button&gt;<br/>            &lt;button onclick=&quot;switchTab(&#39;game&#39;)&quot; id=&quot;tab-game&quot; class=&quot;tab-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all glass-panel text-zinc-400 hover:text-white&quot;&gt;The Vault&lt;/button&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;!-- TAB CONTENT AREA --&gt;<br/><br/>        &lt;!-- 1. The Heartfelt Letter --&gt;<br/>        &lt;div id=&quot;content-letter&quot; class=&quot;tab-content&quot;&gt;<br/>            &lt;div class=&quot;glass-panel p-8 sm:p-12 rounded-3xl relative overflow-hidden&quot;&gt;<br/>                &lt;div class=&quot;absolute top-0 right-0 p-8 opacity-10 pointer-events-none&quot;&gt;<br/>                    &lt;svg class=&quot;w-48 h-48 text-pink-500&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z&quot;/&gt;&lt;/svg&gt;<br/>                &lt;/div&gt;<br/>                <br/>                &lt;h3 class=&quot;text-2xl font-serif font-bold text-white mb-6&quot;&gt;A Little Note From My Heart&lt;/h3&gt;<br/>                <br/>                &lt;div class=&quot;space-y-4 text-zinc-300 leading-relaxed font-light text-base&quot;&gt;<br/>                    &lt;p&gt;Dear [Name/Nickname],&lt;/p&gt;<br/>                    &lt;p&gt;Some people walk into your life and quietly change the entire atmosphere for the better—and you have effortlessly been that person for me. Your laughter, your kindness, and the genuine warmth you carry everywhere you go make the world feel a little softer and a lot brighter.&lt;/p&gt;<br/>                    &lt;p&gt;Today isn&#39;t just about celebrating another year of your life; it&#39;s about celebrating the absolute gift of having you in it. I hope this coming year brings you every single thing your heart desires, because nobody deserves happiness more than you do.&lt;/p&gt;<br/>                    &lt;p class=&quot;pt-4 font-serif italic text-pink-400&quot;&gt;Wishing you the happiest of birthdays. Never change who you are.&lt;/p&gt;<br/>                    &lt;p class=&quot;pt-2 font-medium text-white&quot;&gt;— Always rooting for you ✨&lt;/p&gt;<br/>                &lt;/div&gt;<br/>            &lt;/div&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;!-- 2. Interactive Timeline / Memories --&gt;<br/>        &lt;div id=&quot;content-timeline&quot; class=&quot;tab-content hidden&quot;&gt;<br/>            &lt;div class=&quot;grid grid-cols-1 sm:grid-cols-3 gap-6&quot;&gt;<br/>                &lt;!-- Memory Card 1 --&gt;<br/>                &lt;div class=&quot;glass-card p-6 rounded-2xl relative group&quot;&gt;<br/>                    &lt;div class=&quot;text-xs font-semibold text-pink-400 mb-1&quot;&gt;Chapter I&lt;/div&gt;<br/>                    &lt;h4 class=&quot;text-lg font-bold text-white mb-2&quot;&gt;When We First Met&lt;/h4&gt;<br/>                    &lt;p class=&quot;text-zinc-400 text-sm&quot;&gt;Who knew a simple moment would turn into such an incredible bond? Instantly unforgettable.&lt;/p&gt;<br/>                &lt;/div&gt;<br/>                &lt;!-- Memory Card 2 --&gt;<br/>                &lt;div class=&quot;glass-card p-6 rounded-2xl relative group&quot;&gt;<br/>                    &lt;div class=&quot;text-xs font-semibold text-purple-400 mb-1&quot;&gt;Chapter II&lt;/div&gt;<br/>                    &lt;h4 class=&quot;text-lg font-bold text-white mb-2&quot;&gt;Countless Laughs&lt;/h4&gt;<br/>                    &lt;p class=&quot;text-zinc-400 text-sm&quot;&gt;Through inside jokes, random late-night talks, and moments that left us completely out of breath.&lt;/p&gt;<br/>                &lt;/div&gt;<br/>                &lt;!-- Memory Card 3 --&gt;<br/>                &lt;div class=&quot;glass-card p-6 rounded-2xl relative group&quot;&gt;<br/>                    &lt;div class=&quot;text-xs font-semibold text-pink-400 mb-1&quot;&gt;Chapter III&lt;/div&gt;<br/>                    &lt;h4 class=&quot;text-lg font-bold text-white mb-2&quot;&gt;Today &amp; Beyond&lt;/h4&gt;<br/>                    &lt;p class=&quot;text-zinc-400 text-sm&quot;&gt;Celebrating you today, and looking forward to creating a million more wonderful memories ahead.&lt;/p&gt;<br/>                &lt;/div&gt;<br/>            &lt;/div&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;!-- 3. Why You&#39;re Amazing (Interactive Cards) --&gt;<br/>        &lt;div id=&quot;content-reasons&quot; class=&quot;tab-content hidden&quot;&gt;<br/>            &lt;div class=&quot;grid grid-cols-1 sm:grid-cols-2 gap-4&quot;&gt;<br/>                &lt;div onclick=&quot;sparkleCard(this)&quot; class=&quot;glass-card p-6 rounded-2xl cursor-pointer hover:bg-white/[0.05]&quot;&gt;<br/>                    &lt;div class=&quot;text-2xl mb-2&quot;&gt;☀️&lt;/div&gt;<br/>                    &lt;h4 class=&quot;font-bold text-white mb-1&quot;&gt;Your Radiant Energy&lt;/h4&gt;<br/>                    &lt;p class=&quot;text-zinc-400 text-sm&quot;&gt;You have this rare ability to light up an entire room just by walking into it.&lt;/p&gt;<br/>                &lt;/div&gt;<br/>                &lt;div onclick=&quot;sparkleCard(this)&quot; class=&quot;glass-card p-6 rounded-2xl cursor-pointer hover:bg-white/[0.05]&quot;&gt;<br/>                    &lt;div class=&quot;text-2xl mb-2&quot;&gt;💖&lt;/div&gt;<br/>                    &lt;h4 class=&quot;font-bold text-white mb-1&quot;&gt;Your Golden Heart&lt;/h4&gt;<br/>                    &lt;p class=&quot;text-zinc-400 text-sm&quot;&gt;Your empathy, care, and thoughtfulness for others inspire me every single day.&lt;/p&gt;<br/>                &lt;/div&gt;<br/>                &lt;div onclick=&quot;sparkleCard(this)&quot; class=&quot;glass-card p-6 rounded-2xl cursor-pointer hover:bg-white/[0.05]&quot;&gt;<br/>                    &lt;div class=&quot;text-2xl mb-2&quot;&gt;✨&lt;/div&gt;<br/>                    &lt;h4 class=&quot;font-bold text-white mb-1&quot;&gt;Unmatched Humor&lt;/h4&gt;<br/>                    &lt;p class=&quot;text-zinc-400 text-sm&quot;&gt;You can turn even the most ordinary day into an absolute adventure full of smiles.&lt;/p&gt;<br/>                &lt;/div&gt;<br/>                &lt;div onclick=&quot;sparkleCard(this)&quot; class=&quot;glass-card p-6 rounded-2xl cursor-pointer hover:bg-white/[0.05]&quot;&gt;<br/>                    &lt;div class=&quot;text-2xl mb-2&quot;&gt;🌟&lt;/div&gt;<br/>                    &lt;h4 class=&quot;font-bold text-white mb-1&quot;&gt;Simply Being You&lt;/h4&gt;<br/>                    &lt;p class=&quot;text-zinc-400 text-sm&quot;&gt;No pretenses, just pure authenticity. That&#39;s what makes you entirely irreplaceable.&lt;/p&gt;<br/>                &lt;/div&gt;<br/>            &lt;/div&gt;<br/>            &lt;p class=&quot;text-center text-xs text-zinc-500 mt-4&quot;&gt;Tip: Click any card to send a little burst of magic!&lt;/p&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;!-- 4. The Vault / Interactive Secret Game --&gt;<br/>        &lt;div id=&quot;content-game&quot; class=&quot;tab-content hidden&quot;&gt;<br/>            &lt;div class=&quot;glass-panel p-8 sm:p-10 rounded-3xl text-center max-w-lg mx-auto&quot;&gt;<br/>                &lt;h3 class=&quot;text-2xl font-serif font-bold text-white mb-3&quot;&gt;The Birthday Wish Vault&lt;/h3&gt;<br/>                &lt;p class=&quot;text-zinc-400 text-sm mb-6&quot;&gt;Type a special wish below or click the button to launch a birthday surprise across your screen!&lt;/p&gt;<br/>                <br/>                &lt;input type=&quot;text&quot; id=&quot;wishInput&quot; placeholder=&quot;Type your birthday wish here...&quot; class=&quot;w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-pink-500 mb-4 transition-all&quot;&gt;<br/>                <br/>                &lt;button onclick=&quot;launchSurprise()&quot; class=&quot;w-full py-3 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold shadow-lg shadow-pink-500/20 hover:opacity-95 transition-all&quot;&gt;<br/>                    Release Confetti &amp; Wishes 🎉<br/>                &lt;/button&gt;<br/>            &lt;/div&gt;<br/>        &lt;/div&gt;<br/><br/>    &lt;/section&gt;<br/><br/>    &lt;!-- JavaScript Application Logic --&gt;<br/>    &lt;script&gt;<br/>        // Audio Control State<br/>        const audio = document.getElementById(&#39;bgMusic&#39;);<br/>        const audioToggle = document.getElementById(&#39;audioToggle&#39;);<br/>        const audioIcon = document.getElementById(&#39;audioIcon&#39;);<br/>        const audioText = document.getElementById(&#39;audioText&#39;);<br/>        let isPlaying = false;<br/><br/>        audioToggle.addEventListener(&#39;click&#39;, () =&gt; {<br/>            if (isPlaying) {<br/>                audio.pause();<br/>                audioIcon.textContent = &#39;🔇&#39;;<br/>                audioText.textContent = &#39;Soundtrack: Off&#39;;<br/>                isPlaying = false;<br/>            } else {<br/>                audio.play().catch(e =&gt; console.log(&quot;Audio play blocked by browser policy&quot;));<br/>                audioIcon.textContent = &#39;🎵&#39;;<br/>                audioText.textContent = &#39;Soundtrack: On&#39;;<br/>                isPlaying = true;<br/>            }<br/>        });<br/><br/>        // Unlock Experience &amp; Trigger Initial Confetti<br/>        function unlockExperience() {<br/>            // Attempt autoplay on interaction<br/>            audio.play().then(() =&gt; {<br/>                isPlaying = true;<br/>                audioIcon.textContent = &#39;🎵&#39;;<br/>                audioText.textContent = &#39;Soundtrack: On&#39;;<br/>            }).catch(e =&gt; {});<br/><br/>            // Trigger grand confetti entry<br/>            confetti({<br/>                particleCount: 100,<br/>                spread: 70,<br/>                origin: { y: 0.6 }<br/>            });<br/><br/>            // Transition Sections<br/>            document.getElementById(&#39;sec-entry&#39;).classList.remove(&#39;active&#39;);<br/>            setTimeout(() =&gt; {<br/>                document.getElementById(&#39;sec-entry&#39;).style.display = &#39;none&#39;;<br/>                const dashboard = document.getElementById(&#39;sec-dashboard&#39;);<br/>                dashboard.classList.add(&#39;active&#39;);<br/>            }, 300);<br/>        }<br/><br/>        // Tab Switching Logic<br/>        function switchTab(tabName) {<br/>            // Hide all contents<br/>            document.querySelectorAll(&#39;.tab-content&#39;).forEach(el =&gt; el.classList.add(&#39;hidden&#39;));<br/>            // Reset all buttons<br/>            document.querySelectorAll(&#39;.tab-btn&#39;).forEach(btn =&gt; {<br/>                btn.className = &quot;tab-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all glass-panel text-zinc-400 hover:text-white&quot;;<br/>            });<br/><br/>            // Show selected content<br/>            document.getElementById(`content-${tabName}`).classList.remove(&#39;hidden&#39;);<br/>            // Highlight selected button<br/>            const activeBtn = document.getElementById(`tab-${tabName}`);<br/>            activeBtn.className = &quot;tab-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all bg-pink-500 text-white shadow-lg shadow-pink-500/20&quot;;<br/>        }<br/><br/>        // Interactive Sparkle Effect on Cards<br/>        function sparkleCard(element) {<br/>            confetti({<br/>                particleCount: 25,<br/>                spread: 50,<br/>                origin: {<br/>                    x: (element.getBoundingClientRect().left + element.getBoundingClientRect().right) / 2 / window.innerWidth,<br/>                    y: element.getBoundingClientRect().top / window.innerHeight<br/>                }<br/>            });<br/>        }<br/><br/>        // Vault Surprise Button<br/>        function launchSurprise() {<br/>            const wishInput = document.getElementById(&#39;wishInput&#39;).value;<br/>            <br/>            // Full screen confetti burst<br/>            var duration = 2.5 * 1000;<br/>            var end = Date.now() + duration;<br/><br/>            (function frame() {<br/>                confetti({<br/>                    particleCount: 4,<br/>                    angle: 60,<br/>                    spread: 55,<br/>                    origin: { x: 0 }<br/>                });<br/>                confetti({<br/>                    particleCount: 4,<br/>                    angle: 120,<br/>                    spread: 55,<br/>                    origin: { x: 1 }<br/>                });<br/><br/>                if (Date.now() &lt; end) {<br/>                    requestAnimationFrame(frame);<br/>                }<br/>            }());<br/><br/>            if(wishInput.trim() !== &quot;&quot;) {<br/>                alert(`Your wish: &quot;${wishInput}&quot; has been sent straight into the universe! Happy Birthday! ✨`);<br/>                document.getElementById(&#39;wishInput&#39;).value = &quot;&quot;;<br/>            }<br/>        }<br/>    &lt;/script&gt;<br/>&lt;/body&gt;<br/>&lt;/html&gt;<br/></body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #311042, #020617);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 40px;
+            border-radius: 24px;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="avatar">🚀</div>
+        <h1>Aftab Portfolio</h1>
+        <p>Welcome to my personal website! Built with modern CSS animations and smooth styling on GitHub Pages.</p>
+        
+        <div class="btn-container">
+            <a href="#" class="btn btn-primary">Explore Projects</a>
+            <a href="#" class="btn btn-secondary">Contact Me</a>
+        </div>
+    </div>
+
+</body>
 </html>
