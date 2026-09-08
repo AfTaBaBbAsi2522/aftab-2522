@@ -1,6 +1,781 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<title>AFTAB CYBER 4t4 💀</title>
+
 <style>
-   div{min-height:1em;}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#020403;
+    color:#00ff88;
+    font-family:"Courier New",monospace;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* MATRIX BACKGROUND */
+#matrix{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    opacity:.16;
+    z-index:-5;
+}
+
+/* GRID */
+.grid{
+    position:fixed;
+    inset:0;
+    z-index:-4;
+    background:
+      linear-gradient(rgba(0,255,120,.035) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(0,255,120,.035) 1px,transparent 1px);
+    background-size:45px 45px;
+    pointer-events:none;
+}
+
+/* SCAN LINE */
+.scanline{
+    position:fixed;
+    left:0;
+    width:100%;
+    height:2px;
+    background:#00ff88;
+    box-shadow:0 0 15px #00ff88;
+    opacity:.25;
+    z-index:20;
+    animation:scan 5s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes scan{
+    0%{top:0}
+    100%{top:100%}
+}
+
+/* CORNER TERMINALS */
+.corner{
+    position:fixed;
+    z-index:10;
+    width:250px;
+    color:#00ff88;
+    font-size:10px;
+    line-height:1.5;
+    opacity:.65;
+    pointer-events:none;
+    text-shadow:0 0 5px #00ff88;
+}
+
+.corner.left{
+    left:10px;
+    bottom:10px;
+}
+
+.corner.right{
+    right:10px;
+    top:10px;
+}
+
+.terminal-line{
+    white-space:nowrap;
+    overflow:hidden;
+}
+
+/* LOADING SCREEN */
+#boot{
+    position:fixed;
+    inset:0;
+    background:#000;
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    padding:20px;
+}
+
+.boot-title{
+    font-size:clamp(22px,6vw,55px);
+    color:#00ff88;
+    text-shadow:0 0 10px #00ff88,0 0 30px #00ff88;
+    text-align:center;
+    animation:flicker 1.2s infinite alternate;
+}
+
+.boot-sub{
+    margin-top:20px;
+    color:#7affb8;
+    font-size:12px;
+    text-align:center;
+}
+
+.progress{
+    width:min(500px,85vw);
+    height:8px;
+    border:1px solid #00ff88;
+    margin-top:25px;
+    padding:2px;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:#00ff88;
+    box-shadow:0 0 15px #00ff88;
+    transition:width .15s;
+}
+
+@keyframes flicker{
+    from{opacity:.65}
+    to{opacity:1}
+}
+
+/* MAIN */
+main{
+    opacity:0;
+    transition:opacity 1.2s;
+}
+
+main.show{
+    opacity:1;
+}
+
+/* HERO */
+.hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:30px 20px;
+    position:relative;
+}
+
+.badge{
+    color:#00ff88;
+    border:1px solid #00ff88;
+    padding:7px 15px;
+    font-size:11px;
+    letter-spacing:3px;
+    box-shadow:0 0 15px rgba(0,255,136,.2);
+    margin-bottom:25px;
+}
+
+.photo-wrap{
+    width:210px;
+    height:210px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:35px;
+}
+
+.photo-wrap::before,
+.photo-wrap::after{
+    content:"";
+    position:absolute;
+    inset:-13px;
+    border:2px solid #00ff88;
+    border-radius:50%;
+    box-shadow:0 0 20px #00ff88;
+}
+
+.photo-wrap::after{
+    inset:-25px;
+    border-color:#ffffff55;
+    border-style:dashed;
+    box-shadow:none;
+    animation:spin 10s linear infinite reverse;
+}
+
+.photo-wrap::before{
+    animation:spin 7s linear infinite;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
+
+.profile{
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #00ff88;
+    box-shadow:
+      0 0 15px #00ff88,
+      0 0 50px rgba(0,255,136,.35);
+    position:relative;
+    z-index:2;
+}
+
+.hero h1{
+    font-family:Arial,sans-serif;
+    font-size:clamp(34px,9vw,80px);
+    color:#fff;
+    letter-spacing:4px;
+    text-shadow:
+      3px 0 #00ff88,
+      -3px 0 #ff0055,
+      0 0 25px #00ff88;
+    animation:glitch 2.5s infinite;
+}
+
+@keyframes glitch{
+    0%,90%,100%{transform:none}
+    91%{transform:translate(3px,-2px)}
+    92%{transform:translate(-3px,2px)}
+    93%{transform:translate(1px,0)}
+}
+
+.role{
+    margin-top:20px;
+    color:#00ff88;
+    font-size:clamp(13px,3vw,20px);
+    letter-spacing:2px;
+}
+
+.enter{
+    margin-top:35px;
+    padding:14px 28px;
+    border:1px solid #00ff88;
+    color:#00ff88;
+    text-decoration:none;
+    background:#00ff8810;
+    box-shadow:0 0 15px #00ff8830;
+    transition:.3s;
+}
+
+.enter:hover{
+    color:#000;
+    background:#00ff88;
+    box-shadow:0 0 30px #00ff88;
+}
+
+/* CONTENT */
+.section{
+    width:min(1000px,90%);
+    margin:0 auto;
+    padding:100px 0;
+}
+
+.section-title{
+    color:#fff;
+    font-size:25px;
+    margin-bottom:35px;
+}
+
+.section-title span{
+    color:#00ff88;
+}
+
+/* TERMINAL */
+.terminal{
+    border:1px solid #00ff88;
+    background:#000000cc;
+    padding:25px;
+    box-shadow:0 0 25px rgba(0,255,136,.12);
+    min-height:200px;
+}
+
+.prompt{
+    color:#fff;
+    margin-bottom:10px;
+}
+
+.green{
+    color:#00ff88;
+}
+
+.cursor{
+    display:inline-block;
+    width:8px;
+    height:16px;
+    background:#00ff88;
+    animation:blink .7s infinite;
+    vertical-align:middle;
+}
+
+@keyframes blink{
+    50%{opacity:0}
+}
+
+/* SOCIAL */
+.socials{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.social{
+    text-decoration:none;
+    color:#00ff88;
+    border:1px solid #00ff8855;
+    padding:22px 10px;
+    text-align:center;
+    background:#00ff8807;
+    transition:.3s;
+}
+
+.social:hover{
+    transform:translateY(-6px);
+    border-color:#00ff88;
+    box-shadow:0 0 25px #00ff8840;
+    background:#00ff8812;
+}
+
+.social b{
+    display:block;
+    color:#fff;
+    margin-bottom:8px;
+    font-size:18px;
+}
+
+/* STATUS */
+.status{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.status-box{
+    border:1px solid #ffffff18;
+    padding:20px;
+    background:#ffffff03;
+}
+
+.status-box small{
+    color:#777;
+}
+
+.status-box strong{
+    display:block;
+    color:#00ff88;
+    margin-top:8px;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:50px 20px;
+    border-top:1px solid #00ff8825;
+    color:#557f68;
+    font-size:11px;
+}
+
+/* MOBILE */
+@media(max-width:650px){
+    .socials,
+    .status{
+        grid-template-columns:1fr;
+    }
+
+    .corner{
+        font-size:8px;
+        width:150px;
+        opacity:.35;
+    }
+
+    .corner.right{
+        display:none;
+    }
+
+    .photo-wrap{
+        width:175px;
+        height:175px;
+    }
+
+    .profile{
+        width:155px;
+        height:155px;
+    }
+
+    .hero h1{
+        letter-spacing:2px;
+    }
+}
 </style>
-<body>&lt;!DOCTYPE html&gt;<br/>&lt;html lang=&quot;en&quot;&gt;<br/>&lt;head&gt;<br/>&lt;meta charset=&quot;UTF-8&quot;&gt;<br/>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;<br/>&lt;meta name=&quot;theme-color&quot; content=&quot;#000000&quot;&gt;<br/>&lt;title&gt;AFTAB CYBER 4t4 💀&lt;/title&gt;<br/><br/>&lt;style&gt;<br/>*{<br/>    margin:0;<br/>    padding:0;<br/>    box-sizing:border-box;<br/>}<br/><br/>html{<br/>    scroll-behavior:smooth;<br/>}<br/><br/>body{<br/>    background:#020403;<br/>    color:#00ff88;<br/>    font-family:&quot;Courier New&quot;,monospace;<br/>    min-height:100vh;<br/>    overflow-x:hidden;<br/>}<br/><br/>/* MATRIX BACKGROUND */<br/>#matrix{<br/>    position:fixed;<br/>    inset:0;<br/>    width:100%;<br/>    height:100%;<br/>    opacity:.16;<br/>    z-index:-5;<br/>}<br/><br/>/* GRID */<br/>.grid{<br/>    position:fixed;<br/>    inset:0;<br/>    z-index:-4;<br/>    background:<br/>      linear-gradient(rgba(0,255,120,.035) 1px,transparent 1px),<br/>      linear-gradient(90deg,rgba(0,255,120,.035) 1px,transparent 1px);<br/>    background-size:45px 45px;<br/>    pointer-events:none;<br/>}<br/><br/>/* SCAN LINE */<br/>.scanline{<br/>    position:fixed;<br/>    left:0;<br/>    width:100%;<br/>    height:2px;<br/>    background:#00ff88;<br/>    box-shadow:0 0 15px #00ff88;<br/>    opacity:.25;<br/>    z-index:20;<br/>    animation:scan 5s linear infinite;<br/>    pointer-events:none;<br/>}<br/><br/>@keyframes scan{<br/>    0%{top:0}<br/>    100%{top:100%}<br/>}<br/><br/>/* CORNER TERMINALS */<br/>.corner{<br/>    position:fixed;<br/>    z-index:10;<br/>    width:250px;<br/>    color:#00ff88;<br/>    font-size:10px;<br/>    line-height:1.5;<br/>    opacity:.65;<br/>    pointer-events:none;<br/>    text-shadow:0 0 5px #00ff88;<br/>}<br/><br/>.corner.left{<br/>    left:10px;<br/>    bottom:10px;<br/>}<br/><br/>.corner.right{<br/>    right:10px;<br/>    top:10px;<br/>}<br/><br/>.terminal-line{<br/>    white-space:nowrap;<br/>    overflow:hidden;<br/>}<br/><br/>/* LOADING SCREEN */<br/>#boot{<br/>    position:fixed;<br/>    inset:0;<br/>    background:#000;<br/>    z-index:9999;<br/>    display:flex;<br/>    align-items:center;<br/>    justify-content:center;<br/>    flex-direction:column;<br/>    padding:20px;<br/>}<br/><br/>.boot-title{<br/>    font-size:clamp(22px,6vw,55px);<br/>    color:#00ff88;<br/>    text-shadow:0 0 10px #00ff88,0 0 30px #00ff88;<br/>    text-align:center;<br/>    animation:flicker 1.2s infinite alternate;<br/>}<br/><br/>.boot-sub{<br/>    margin-top:20px;<br/>    color:#7affb8;<br/>    font-size:12px;<br/>    text-align:center;<br/>}<br/><br/>.progress{<br/>    width:min(500px,85vw);<br/>    height:8px;<br/>    border:1px solid #00ff88;<br/>    margin-top:25px;<br/>    padding:2px;<br/>}<br/><br/>.progress-bar{<br/>    width:0%;<br/>    height:100%;<br/>    background:#00ff88;<br/>    box-shadow:0 0 15px #00ff88;<br/>    transition:width .15s;<br/>}<br/><br/>@keyframes flicker{<br/>    from{opacity:.65}<br/>    to{opacity:1}<br/>}<br/><br/>/* MAIN */<br/>main{<br/>    opacity:0;<br/>    transition:opacity 1.2s;<br/>}<br/><br/>main.show{<br/>    opacity:1;<br/>}<br/><br/>/* HERO */<br/>.hero{<br/>    min-height:100vh;<br/>    display:flex;<br/>    flex-direction:column;<br/>    align-items:center;<br/>    justify-content:center;<br/>    text-align:center;<br/>    padding:30px 20px;<br/>    position:relative;<br/>}<br/><br/>.badge{<br/>    color:#00ff88;<br/>    border:1px solid #00ff88;<br/>    padding:7px 15px;<br/>    font-size:11px;<br/>    letter-spacing:3px;<br/>    box-shadow:0 0 15px rgba(0,255,136,.2);<br/>    margin-bottom:25px;<br/>}<br/><br/>.photo-wrap{<br/>    width:210px;<br/>    height:210px;<br/>    position:relative;<br/>    display:flex;<br/>    align-items:center;<br/>    justify-content:center;<br/>    margin-bottom:35px;<br/>}<br/><br/>.photo-wrap::before,<br/>.photo-wrap::after{<br/>    content:&quot;&quot;;<br/>    position:absolute;<br/>    inset:-13px;<br/>    border:2px solid #00ff88;<br/>    border-radius:50%;<br/>    box-shadow:0 0 20px #00ff88;<br/>}<br/><br/>.photo-wrap::after{<br/>    inset:-25px;<br/>    border-color:#ffffff55;<br/>    border-style:dashed;<br/>    box-shadow:none;<br/>    animation:spin 10s linear infinite reverse;<br/>}<br/><br/>.photo-wrap::before{<br/>    animation:spin 7s linear infinite;<br/>}<br/><br/>@keyframes spin{<br/>    to{transform:rotate(360deg)}<br/>}<br/><br/>.profile{<br/>    width:190px;<br/>    height:190px;<br/>    border-radius:50%;<br/>    object-fit:cover;<br/>    border:3px solid #00ff88;<br/>    box-shadow:<br/>      0 0 15px #00ff88,<br/>      0 0 50px rgba(0,255,136,.35);<br/>    position:relative;<br/>    z-index:2;<br/>}<br/><br/>.hero h1{<br/>    font-family:Arial,sans-serif;<br/>    font-size:clamp(34px,9vw,80px);<br/>    color:#fff;<br/>    letter-spacing:4px;<br/>    text-shadow:<br/>      3px 0 #00ff88,<br/>      -3px 0 #ff0055,<br/>      0 0 25px #00ff88;<br/>    animation:glitch 2.5s infinite;<br/>}<br/><br/>@keyframes glitch{<br/>    0%,90%,100%{transform:none}<br/>    91%{transform:translate(3px,-2px)}<br/>    92%{transform:translate(-3px,2px)}<br/>    93%{transform:translate(1px,0)}<br/>}<br/><br/>.role{<br/>    margin-top:20px;<br/>    color:#00ff88;<br/>    font-size:clamp(13px,3vw,20px);<br/>    letter-spacing:2px;<br/>}<br/><br/>.enter{<br/>    margin-top:35px;<br/>    padding:14px 28px;<br/>    border:1px solid #00ff88;<br/>    color:#00ff88;<br/>    text-decoration:none;<br/>    background:#00ff8810;<br/>    box-shadow:0 0 15px #00ff8830;<br/>    transition:.3s;<br/>}<br/><br/>.enter:hover{<br/>    color:#000;<br/>    background:#00ff88;<br/>    box-shadow:0 0 30px #00ff88;<br/>}<br/><br/>/* CONTENT */<br/>.section{<br/>    width:min(1000px,90%);<br/>    margin:0 auto;<br/>    padding:100px 0;<br/>}<br/><br/>.section-title{<br/>    color:#fff;<br/>    font-size:25px;<br/>    margin-bottom:35px;<br/>}<br/><br/>.section-title span{<br/>    color:#00ff88;<br/>}<br/><br/>/* TERMINAL */<br/>.terminal{<br/>    border:1px solid #00ff88;<br/>    background:#000000cc;<br/>    padding:25px;<br/>    box-shadow:0 0 25px rgba(0,255,136,.12);<br/>    min-height:200px;<br/>}<br/><br/>.prompt{<br/>    color:#fff;<br/>    margin-bottom:10px;<br/>}<br/><br/>.green{<br/>    color:#00ff88;<br/>}<br/><br/>.cursor{<br/>    display:inline-block;<br/>    width:8px;<br/>    height:16px;<br/>    background:#00ff88;<br/>    animation:blink .7s infinite;<br/>    vertical-align:middle;<br/>}<br/><br/>@keyframes blink{<br/>    50%{opacity:0}<br/>}<br/><br/>/* SOCIAL */<br/>.socials{<br/>    display:grid;<br/>    grid-template-columns:repeat(3,1fr);<br/>    gap:15px;<br/>}<br/><br/>.social{<br/>    text-decoration:none;<br/>    color:#00ff88;<br/>    border:1px solid #00ff8855;<br/>    padding:22px 10px;<br/>    text-align:center;<br/>    background:#00ff8807;<br/>    transition:.3s;<br/>}<br/><br/>.social:hover{<br/>    transform:translateY(-6px);<br/>    border-color:#00ff88;<br/>    box-shadow:0 0 25px #00ff8840;<br/>    background:#00ff8812;<br/>}<br/><br/>.social b{<br/>    display:block;<br/>    color:#fff;<br/>    margin-bottom:8px;<br/>    font-size:18px;<br/>}<br/><br/>/* STATUS */<br/>.status{<br/>    display:grid;<br/>    grid-template-columns:repeat(3,1fr);<br/>    gap:15px;<br/>}<br/><br/>.status-box{<br/>    border:1px solid #ffffff18;<br/>    padding:20px;<br/>    background:#ffffff03;<br/>}<br/><br/>.status-box small{<br/>    color:#777;<br/>}<br/><br/>.status-box strong{<br/>    display:block;<br/>    color:#00ff88;<br/>    margin-top:8px;<br/>}<br/><br/>/* FOOTER */<br/>footer{<br/>    text-align:center;<br/>    padding:50px 20px;<br/>    border-top:1px solid #00ff8825;<br/>    color:#557f68;<br/>    font-size:11px;<br/>}<br/><br/>/* MOBILE */<br/>@media(max-width:650px){<br/>    .socials,<br/>    .status{<br/>        grid-template-columns:1fr;<br/>    }<br/><br/>    .corner{<br/>        font-size:8px;<br/>        width:150px;<br/>        opacity:.35;<br/>    }<br/><br/>    .corner.right{<br/>        display:none;<br/>    }<br/><br/>    .photo-wrap{<br/>        width:175px;<br/>        height:175px;<br/>    }<br/><br/>    .profile{<br/>        width:155px;<br/>        height:155px;<br/>    }<br/><br/>    .hero h1{<br/>        letter-spacing:2px;<br/>    }<br/>}<br/>&lt;/style&gt;<br/>&lt;/head&gt;<br/><br/>&lt;body&gt;<br/><br/>&lt;!-- MATRIX --&gt;<br/>&lt;canvas id=&quot;matrix&quot;&gt;&lt;/canvas&gt;<br/>&lt;div class=&quot;grid&quot;&gt;&lt;/div&gt;<br/>&lt;div class=&quot;scanline&quot;&gt;&lt;/div&gt;<br/><br/>&lt;!-- FAKE CYBER TERMINALS --&gt;<br/>&lt;div class=&quot;corner left&quot; id=&quot;terminalLeft&quot;&gt;&lt;/div&gt;<br/>&lt;div class=&quot;corner right&quot; id=&quot;terminalRight&quot;&gt;&lt;/div&gt;<br/><br/>&lt;!-- BOOT SCREEN --&gt;<br/>&lt;div id=&quot;boot&quot;&gt;<br/>    &lt;div class=&quot;boot-title&quot;&gt;AFTAB CYBER 4t4 💀&lt;/div&gt;<br/>    &lt;div class=&quot;boot-sub&quot; id=&quot;bootText&quot;&gt;INITIALIZING SYSTEM...&lt;/div&gt;<br/><br/>    &lt;div class=&quot;progress&quot;&gt;<br/>        &lt;div class=&quot;progress-bar&quot; id=&quot;progressBar&quot;&gt;&lt;/div&gt;<br/>    &lt;/div&gt;<br/>&lt;/div&gt;<br/><br/>&lt;main id=&quot;main&quot;&gt;<br/><br/>&lt;section class=&quot;hero&quot;&gt;<br/><br/>    &lt;div class=&quot;badge&quot;&gt;SECURE CONNECTION • ONLINE&lt;/div&gt;<br/><br/>    &lt;div class=&quot;photo-wrap&quot;&gt;<br/>        &lt;img<br/>          class=&quot;profile&quot;<br/>          src=&quot;https://cdn.phototourl.com/member/2026-09-08-1c67c954-a9a6-4d44-b6c7-e9ff144c2829.png&quot;<br/>          alt=&quot;Aftab&quot;<br/>        &gt;<br/>    &lt;/div&gt;<br/><br/>    &lt;h1&gt;WELCOME TO&lt;br&gt;AFTAB ZONE 💀⚜️&lt;/h1&gt;<br/><br/>    &lt;div class=&quot;role&quot;&gt;<br/>        ROLE: GIVE RESPECT TAKE RESPECT 💀⚜️<br/>    &lt;/div&gt;<br/><br/>    &lt;a class=&quot;enter&quot; href=&quot;#profile&quot;&gt;<br/>        [ ENTER AFTAB ZONE ]<br/>    &lt;/a&gt;<br/><br/>&lt;/section&gt;<br/><br/><br/>&lt;section class=&quot;section&quot; id=&quot;profile&quot;&gt;<br/><br/>    &lt;div class=&quot;section-title&quot;&gt;<br/>        &lt;span&gt;//&lt;/span&gt; USER PROFILE<br/>    &lt;/div&gt;<br/><br/>    &lt;div class=&quot;terminal&quot;&gt;<br/>        &lt;div class=&quot;prompt&quot;&gt;root@aftab:~$ &lt;span class=&quot;green&quot;&gt;whoami&lt;/span&gt;&lt;/div&gt;<br/>        &lt;p&gt;&gt; NAME: &lt;span class=&quot;green&quot;&gt;AFTAB&lt;/span&gt;&lt;/p&gt;<br/>        &lt;p&gt;&gt; CODENAME: &lt;span class=&quot;green&quot;&gt;CYBER 4t4 💀&lt;/span&gt;&lt;/p&gt;<br/>        &lt;p&gt;&gt; STATUS: &lt;span class=&quot;green&quot;&gt;ONLINE&lt;/span&gt;&lt;/p&gt;<br/>        &lt;p&gt;&gt; ROLE: &lt;span class=&quot;green&quot;&gt;GIVE RESPECT TAKE RESPECT 💀⚜️&lt;/span&gt;&lt;/p&gt;<br/>        &lt;p&gt;&gt; SYSTEM: &lt;span class=&quot;green&quot;&gt;AFTAB ZONE&lt;/span&gt;&lt;/p&gt;<br/>        &lt;br&gt;<br/>        &lt;p&gt;root@aftab:~$ &lt;span class=&quot;cursor&quot;&gt;&lt;/span&gt;&lt;/p&gt;<br/>    &lt;/div&gt;<br/><br/>&lt;/section&gt;<br/><br/><br/>&lt;section class=&quot;section&quot;&gt;<br/><br/>    &lt;div class=&quot;section-title&quot;&gt;<br/>        &lt;span&gt;//&lt;/span&gt; SYSTEM STATUS<br/>    &lt;/div&gt;<br/><br/>    &lt;div class=&quot;status&quot;&gt;<br/><br/>        &lt;div class=&quot;status-box&quot;&gt;<br/>            &lt;small&gt;NETWORK&lt;/small&gt;<br/>            &lt;strong&gt;● ONLINE&lt;/strong&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;div class=&quot;status-box&quot;&gt;<br/>            &lt;small&gt;SECURITY&lt;/small&gt;<br/>            &lt;strong&gt;● ACTIVE&lt;/strong&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;div class=&quot;status-box&quot;&gt;<br/>            &lt;small&gt;ACCESS&lt;/small&gt;<br/>            &lt;strong&gt;● GRANTED&lt;/strong&gt;<br/>        &lt;/div&gt;<br/><br/>    &lt;/div&gt;<br/><br/>&lt;/section&gt;<br/><br/><br/>&lt;section class=&quot;section&quot;&gt;<br/><br/>    &lt;div class=&quot;section-title&quot;&gt;<br/>        &lt;span&gt;//&lt;/span&gt; CONNECT WITH ME<br/>    &lt;/div&gt;<br/><br/>    &lt;div class=&quot;socials&quot;&gt;<br/><br/>        &lt;a class=&quot;social&quot;<br/>           href=&quot;https://www.instagram.com/aftab4t4?stkn=MXQ5NXA1cWk5MDByYg==&quot;<br/>           target=&quot;_blank&quot;<br/>           rel=&quot;noopener noreferrer&quot;&gt;<br/>            &lt;b&gt;INSTAGRAM&lt;/b&gt;<br/>            @aftab4t4<br/>        &lt;/a&gt;<br/><br/>        &lt;a class=&quot;social&quot;<br/>           href=&quot;https://www.tiktok.com/@aftab4t4&quot;<br/>           target=&quot;_blank&quot;<br/>           rel=&quot;noopener noreferrer&quot;&gt;<br/>            &lt;b&gt;TIKTOK&lt;/b&gt;<br/>            @aftab4t4<br/>        &lt;/a&gt;<br/><br/>        &lt;a class=&quot;social&quot;<br/>           href=&quot;https://www.facebook.com/share/1BuDg1asbx/&quot;<br/>           target=&quot;_blank&quot;<br/>           rel=&quot;noopener noreferrer&quot;&gt;<br/>            &lt;b&gt;FACEBOOK&lt;/b&gt;<br/>            AFTAB<br/>        &lt;/a&gt;<br/><br/>    &lt;/div&gt;<br/><br/>&lt;/section&gt;<br/><br/><br/>&lt;footer&gt;<br/>    AFTAB CYBER 4t4 💀⚜️&lt;br&gt;&lt;br&gt;<br/>    GIVE RESPECT • TAKE RESPECT<br/>&lt;/footer&gt;<br/><br/>&lt;/main&gt;<br/><br/><br/>&lt;script&gt;<br/><br/>/* =========================<br/>   BOOT ANIMATION<br/>========================= */<br/><br/>const boot = document.getElementById(&quot;boot&quot;);<br/>const main = document.getElementById(&quot;main&quot;);<br/>const progressBar = document.getElementById(&quot;progressBar&quot;);<br/>const bootText = document.getElementById(&quot;bootText&quot;);<br/><br/>let progress = 0;<br/><br/>const bootMessages = [<br/>    &quot;INITIALIZING SYSTEM...&quot;,<br/>    &quot;LOADING CYBER MODULES...&quot;,<br/>    &quot;ESTABLISHING SECURE CONNECTION...&quot;,<br/>    &quot;SCANNING NETWORK...&quot;,<br/>    &quot;ACCESS GRANTED...&quot;,<br/>    &quot;WELCOME AFTAB...&quot;<br/>];<br/><br/>let messageIndex = 0;<br/><br/>const loader = setInterval(() =&gt; {<br/><br/>    progress += Math.floor(Math.random()*8)+3;<br/><br/>    if(progress &gt; 100) progress = 100;<br/><br/>    progressBar.style.width = progress + &quot;%&quot;;<br/><br/>    if(progress &gt; 15 &amp;&amp; messageIndex === 0){<br/>        messageIndex++;<br/>        bootText.textContent = bootMessages[1];<br/>    }<br/><br/>    if(progress &gt; 35 &amp;&amp; messageIndex === 1){<br/>        messageIndex++;<br/>        bootText.textContent = bootMessages[2];<br/>    }<br/><br/>    if(progress &gt; 55 &amp;&amp; messageIndex === 2){<br/>        messageIndex++;<br/>        bootText.textContent = bootMessages[3];<br/>    }<br/><br/>    if(progress &gt; 75 &amp;&amp; messageIndex === 3){<br/>        messageIndex++;<br/>        bootText.textContent = bootMessages[4];<br/>    }<br/><br/>    if(progress &gt; 90 &amp;&amp; messageIndex === 4){<br/>        messageIndex++;<br/>        bootText.textContent = bootMessages[5];<br/>    }<br/><br/>    if(progress &gt;= 100){<br/><br/>        clearInterval(loader);<br/><br/>        setTimeout(() =&gt; {<br/>            boot.style.opacity = &quot;0&quot;;<br/><br/>            setTimeout(() =&gt; {<br/>                boot.style.display = &quot;none&quot;;<br/>                main.classList.add(&quot;show&quot;);<br/>            },800);<br/><br/>        },600);<br/>    }<br/><br/>},150);<br/><br/><br/>/* =========================<br/>   MATRIX RAIN<br/>========================= */<br/><br/>const canvas = document.getElementById(&quot;matrix&quot;);<br/>const ctx = canvas.getContext(&quot;2d&quot;);<br/><br/>function resizeCanvas(){<br/>    canvas.width = window.innerWidth;<br/>    canvas.height = window.innerHeight;<br/>}<br/><br/>resizeCanvas();<br/><br/>window.addEventListener(&quot;resize&quot;,resizeCanvas);<br/><br/>const chars =<br/>&quot;01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz{}[]&lt;&gt;/\\$#@%&amp;*+=-_&quot;;<br/><br/>const fontSize = 13;<br/>let columns = Math.floor(window.innerWidth/fontSize);<br/>let drops = Array(columns).fill(1);<br/><br/>function matrixRain(){<br/><br/>    ctx.fillStyle = &quot;rgba(0,0,0,0.055)&quot;;<br/>    ctx.fillRect(0,0,canvas.width,canvas.height);<br/><br/>    ctx.fillStyle = &quot;#00ff88&quot;;<br/>    ctx.font = fontSize + &quot;px monospace&quot;;<br/><br/>    for(let i=0;i&lt;drops.length;i++){<br/><br/>        const text =<br/>            chars[Math.floor(Math.random()*chars.length)];<br/><br/>        ctx.fillText(<br/>            text,<br/>            i*fontSize,<br/>            drops[i]*fontSize<br/>        );<br/><br/>        if(<br/>            drops[i]*fontSize &gt; canvas.height &amp;&amp;<br/>            Math.random() &gt; .975<br/>        ){<br/>            drops[i]=0;<br/>        }<br/><br/>        drops[i]++;<br/>    }<br/>}<br/><br/>setInterval(matrixRain,40);<br/><br/><br/>/* =========================<br/>   FAKE TERMINAL CODE<br/>========================= */<br/><br/>const leftTerminal = document.getElementById(&quot;terminalLeft&quot;);<br/>const rightTerminal = document.getElementById(&quot;terminalRight&quot;);<br/><br/>const fakeCommands = [<br/>    &quot;&gt; connecting...&quot;,<br/>    &quot;&gt; bypassing firewall...&quot;,<br/>    &quot;&gt; encrypting channel...&quot;,<br/>    &quot;&gt; packet received&quot;,<br/>    &quot;&gt; scanning nodes...&quot;,<br/>    &quot;&gt; 0x4A7F detected&quot;,<br/>    &quot;&gt; system online&quot;,<br/>    &quot;&gt; access granted&quot;,<br/>    &quot;&gt; loading modules...&quot;,<br/>    &quot;&gt; connection secure&quot;,<br/>    &quot;&gt; proxy initialized&quot;,<br/>    &quot;&gt; compiling...&quot;,<br/>    &quot;&gt; terminal ready&quot;<br/>];<br/><br/>function randomTerminal(){<br/><br/>    let output=&quot;&quot;;<br/><br/>    for(let i=0;i&lt;7;i++){<br/><br/>        output +=<br/>        fakeCommands[<br/>            Math.floor(Math.random()*fakeCommands.length)<br/>        ] + &quot;&lt;br&gt;&quot;;<br/>    }<br/><br/>    return output;<br/>}<br/><br/>function updateTerminals(){<br/><br/>    leftTerminal.innerHTML = randomTerminal();<br/>    rightTerminal.innerHTML = randomTerminal();<br/><br/>}<br/><br/>updateTerminals();<br/><br/>setInterval(updateTerminals,1200);<br/><br/><br/>/* =========================<br/>   RANDOM GLITCH ON TITLE<br/>========================= */<br/><br/>const title = document.querySelector(&quot;.hero h1&quot;);<br/><br/>setInterval(()=&gt;{<br/><br/>    if(Math.random() &gt; .55){<br/><br/>        title.style.textShadow =<br/>        &quot;5px 0 #00ff88,-5px 0 #ff0055,0 0 30px #00ff88&quot;;<br/><br/>        setTimeout(()=&gt;{<br/>            title.style.textShadow =<br/>            &quot;3px 0 #00ff88,-3px 0 #ff0055,0 0 25px #00ff88&quot;;<br/>        },100);<br/><br/>    }<br/><br/>},1800);<br/><br/><br/>/* =========================<br/>   ONLINE STATUS EFFECT<br/>========================= */<br/><br/>document.querySelectorAll(&quot;.status-box strong&quot;).forEach(el=&gt;{<br/><br/>    setInterval(()=&gt;{<br/><br/>        el.style.opacity = &quot;0.35&quot;;<br/><br/>        setTimeout(()=&gt;{<br/>            el.style.opacity = &quot;1&quot;;<br/>        },200);<br/><br/>    },2500 + Math.random()*1500);<br/><br/>});<br/><br/>&lt;/script&gt;<br/><br/>&lt;/body&gt;<br/>&lt;/html&gt;</body>
+</head>
+
+<body>
+
+<!-- MATRIX -->
+<canvas id="matrix"></canvas>
+<div class="grid"></div>
+<div class="scanline"></div>
+
+<!-- FAKE CYBER TERMINALS -->
+<div class="corner left" id="terminalLeft"></div>
+<div class="corner right" id="terminalRight"></div>
+
+<!-- BOOT SCREEN -->
+<div id="boot">
+    <div class="boot-title">AFTAB CYBER 4t4 💀</div>
+    <div class="boot-sub" id="bootText">INITIALIZING SYSTEM...</div>
+
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+</div>
+
+<main id="main">
+
+<section class="hero">
+
+    <div class="badge">SECURE CONNECTION • ONLINE</div>
+
+    <div class="photo-wrap">
+        <img
+          class="profile"
+          src="https://cdn.phototourl.com/member/2026-09-08-1c67c954-a9a6-4d44-b6c7-e9ff144c2829.png"
+          alt="Aftab"
+        >
+    </div>
+
+    <h1>WELCOME TO<br>AFTAB ZONE 💀⚜️</h1>
+
+    <div class="role">
+        ROLE: GIVE RESPECT TAKE RESPECT 💀⚜️
+    </div>
+
+    <a class="enter" href="#profile">
+        [ ENTER AFTAB ZONE ]
+    </a>
+
+</section>
+
+
+<section class="section" id="profile">
+
+    <div class="section-title">
+        <span>//</span> USER PROFILE
+    </div>
+
+    <div class="terminal">
+        <div class="prompt">root@aftab:~$ <span class="green">whoami</span></div>
+        <p>> NAME: <span class="green">AFTAB</span></p>
+        <p>> CODENAME: <span class="green">CYBER 4t4 💀</span></p>
+        <p>> STATUS: <span class="green">ONLINE</span></p>
+        <p>> ROLE: <span class="green">GIVE RESPECT TAKE RESPECT 💀⚜️</span></p>
+        <p>> SYSTEM: <span class="green">AFTAB ZONE</span></p>
+        <br>
+        <p>root@aftab:~$ <span class="cursor"></span></p>
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="section-title">
+        <span>//</span> SYSTEM STATUS
+    </div>
+
+    <div class="status">
+
+        <div class="status-box">
+            <small>NETWORK</small>
+            <strong>● ONLINE</strong>
+        </div>
+
+        <div class="status-box">
+            <small>SECURITY</small>
+            <strong>● ACTIVE</strong>
+        </div>
+
+        <div class="status-box">
+            <small>ACCESS</small>
+            <strong>● GRANTED</strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="section-title">
+        <span>//</span> CONNECT WITH ME
+    </div>
+
+    <div class="socials">
+
+        <a class="social"
+           href="https://www.instagram.com/aftab4t4?stkn=MXQ5NXA1cWk5MDByYg=="
+           target="_blank"
+           rel="noopener noreferrer">
+            <b>INSTAGRAM</b>
+            @aftab4t4
+        </a>
+
+        <a class="social"
+           href="https://www.tiktok.com/@aftab4t4"
+           target="_blank"
+           rel="noopener noreferrer">
+            <b>TIKTOK</b>
+            @aftab4t4
+        </a>
+
+        <a class="social"
+           href="https://www.facebook.com/share/1BuDg1asbx/"
+           target="_blank"
+           rel="noopener noreferrer">
+            <b>FACEBOOK</b>
+            AFTAB
+        </a>
+
+    </div>
+
+</section>
+
+
+<footer>
+    AFTAB CYBER 4t4 💀⚜️<br><br>
+    GIVE RESPECT • TAKE RESPECT
+</footer>
+
+</main>
+
+
+<script>
+
+/* =========================
+   BOOT ANIMATION
+========================= */
+
+const boot = document.getElementById("boot");
+const main = document.getElementById("main");
+const progressBar = document.getElementById("progressBar");
+const bootText = document.getElementById("bootText");
+
+let progress = 0;
+
+const bootMessages = [
+    "INITIALIZING SYSTEM...",
+    "LOADING CYBER MODULES...",
+    "ESTABLISHING SECURE CONNECTION...",
+    "SCANNING NETWORK...",
+    "ACCESS GRANTED...",
+    "WELCOME AFTAB..."
+];
+
+let messageIndex = 0;
+
+const loader = setInterval(() => {
+
+    progress += Math.floor(Math.random()*8)+3;
+
+    if(progress > 100) progress = 100;
+
+    progressBar.style.width = progress + "%";
+
+    if(progress > 15 && messageIndex === 0){
+        messageIndex++;
+        bootText.textContent = bootMessages[1];
+    }
+
+    if(progress > 35 && messageIndex === 1){
+        messageIndex++;
+        bootText.textContent = bootMessages[2];
+    }
+
+    if(progress > 55 && messageIndex === 2){
+        messageIndex++;
+        bootText.textContent = bootMessages[3];
+    }
+
+    if(progress > 75 && messageIndex === 3){
+        messageIndex++;
+        bootText.textContent = bootMessages[4];
+    }
+
+    if(progress > 90 && messageIndex === 4){
+        messageIndex++;
+        bootText.textContent = bootMessages[5];
+    }
+
+    if(progress >= 100){
+
+        clearInterval(loader);
+
+        setTimeout(() => {
+            boot.style.opacity = "0";
+
+            setTimeout(() => {
+                boot.style.display = "none";
+                main.classList.add("show");
+            },800);
+
+        },600);
+    }
+
+},150);
+
+
+/* =========================
+   MATRIX RAIN
+========================= */
+
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+
+window.addEventListener("resize",resizeCanvas);
+
+const chars =
+"01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz{}[]<>/\\$#@%&*+=-_";
+
+const fontSize = 13;
+let columns = Math.floor(window.innerWidth/fontSize);
+let drops = Array(columns).fill(1);
+
+function matrixRain(){
+
+    ctx.fillStyle = "rgba(0,0,0,0.055)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle = "#00ff88";
+    ctx.font = fontSize + "px monospace";
+
+    for(let i=0;i<drops.length;i++){
+
+        const text =
+            chars[Math.floor(Math.random()*chars.length)];
+
+        ctx.fillText(
+            text,
+            i*fontSize,
+            drops[i]*fontSize
+        );
+
+        if(
+            drops[i]*fontSize > canvas.height &&
+            Math.random() > .975
+        ){
+            drops[i]=0;
+        }
+
+        drops[i]++;
+    }
+}
+
+setInterval(matrixRain,40);
+
+
+/* =========================
+   FAKE TERMINAL CODE
+========================= */
+
+const leftTerminal = document.getElementById("terminalLeft");
+const rightTerminal = document.getElementById("terminalRight");
+
+const fakeCommands = [
+    "> connecting...",
+    "> bypassing firewall...",
+    "> encrypting channel...",
+    "> packet received",
+    "> scanning nodes...",
+    "> 0x4A7F detected",
+    "> system online",
+    "> access granted",
+    "> loading modules...",
+    "> connection secure",
+    "> proxy initialized",
+    "> compiling...",
+    "> terminal ready"
+];
+
+function randomTerminal(){
+
+    let output="";
+
+    for(let i=0;i<7;i++){
+
+        output +=
+        fakeCommands[
+            Math.floor(Math.random()*fakeCommands.length)
+        ] + "<br>";
+    }
+
+    return output;
+}
+
+function updateTerminals(){
+
+    leftTerminal.innerHTML = randomTerminal();
+    rightTerminal.innerHTML = randomTerminal();
+
+}
+
+updateTerminals();
+
+setInterval(updateTerminals,1200);
+
+
+/* =========================
+   RANDOM GLITCH ON TITLE
+========================= */
+
+const title = document.querySelector(".hero h1");
+
+setInterval(()=>{
+
+    if(Math.random() > .55){
+
+        title.style.textShadow =
+        "5px 0 #00ff88,-5px 0 #ff0055,0 0 30px #00ff88";
+
+        setTimeout(()=>{
+            title.style.textShadow =
+            "3px 0 #00ff88,-3px 0 #ff0055,0 0 25px #00ff88";
+        },100);
+
+    }
+
+},1800);
+
+
+/* =========================
+   ONLINE STATUS EFFECT
+========================= */
+
+document.querySelectorAll(".status-box strong").forEach(el=>{
+
+    setInterval(()=>{
+
+        el.style.opacity = "0.35";
+
+        setTimeout(()=>{
+            el.style.opacity = "1";
+        },200);
+
+    },2500 + Math.random()*1500);
+
+});
+
+</script>
+
+</body>
 </html>
