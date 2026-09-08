@@ -286,37 +286,6 @@
             transform: scale(1.2) rotate(10deg);
         }
 
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 0 30px rgba(255, 77, 109, 0.3);
-            background: #000;
-        }
-
-        video {
-            width: 100%;
-            height: auto;
-            max-height: 400px;
-            display: block;
-            border-radius: 20px;
-            object-fit: contain;
-        }
-
-        .video-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            backdrop-filter: blur(4px);
-            z-index: 5;
-        }
-
         .memories-scroll {
             width: 100%;
             max-height: 60vh;
@@ -514,10 +483,10 @@
         <div id="screen-1" class="screen">
             <h1 class="grand-title">HAPPY BIRTHDAY TUBA 🌸💖</h1>
             <div class="glass-card">
+                <p class="fade-line">“Chapter 20 begins, Tuba… 📖✨”</p>
+                <p class="fade-line">“May this be the chapter where your dreams get closer, your smile gets brighter, and life gives you countless reasons to say — ‘I’m glad I lived this moment.’ ❤️”</p>
                 <p class="fade-line">“Tumhari zindagi ka ye naya saal tumhare liye bohat saari khushiyan, sukoon aur beautiful moments lekar aaye. ✨”</p>
-                <p class="fade-line">“Bas dil se dua hai ke tum hamesha khush raho, tumhari har genuine wish poori ho aur tumhari smile kabhi kam na ho. 🫶🏻”</p>
-                <p class="fade-line">“No matter what, today is your day… so enjoy it to the fullest. ❤️”</p>
-                <p class="fade-line">“Happy Birthday once again, Tuba. 🎂✨”</p>
+                <p class="fade-line">“No matter what, today is your day… so enjoy it to the fullest. 🎂✨”</p>
             </div>
             <button id="btn-screen-1" class="btn-glow fade-line" onclick="nextScreen(2)">Your surprise awaits ❤️</button>
         </div>
@@ -551,21 +520,6 @@
                 <div class="gift-box" onclick="openGift(this)">🎁</div>
             </div>
             <p id="gift-status" style="margin-top: 20px; opacity: 0; color: #ffb3c1;">You found it… but there’s still more. ❤️</p>
-        </div>
-
-        <!-- 4. CINEMATIC VIDEO -->
-        <div id="screen-4" class="screen">
-            <h2>Special Moments 🎥</h2>
-            <div class="video-wrapper">
-                <video id="birthday-video" controls playsinline webkit-playsinline preload="auto">
-                    <source src="https://files.catbox.moe/5fvfig.mp4" type="video/mp4">
-                    Your browser does not support video playback.
-                </video>
-                <div id="video-overlay" class="video-overlay" onclick="playVideo()">
-                    <span style="font-size: 1.1rem; color: #fff; font-weight: 600;">Tap to play video ❤️</span>
-                </div>
-            </div>
-            <button class="btn-glow" style="margin-top:20px;" onclick="nextScreen('poetry-2')">Continue ❤️</button>
         </div>
 
         <!-- POETRY INTERLUDE 2 -->
@@ -932,6 +886,31 @@
             if(nextEl) {
                 nextEl.classList.add('active');
                 revealTextLines(targetId);
+                
+                // Trigger celebratory confetti/flower burst when reaching screen-1
+                if(targetId === 'screen-1') {
+                    confetti({
+                        particleCount: 100,
+                        spread: 120,
+                        origin: { y: 0 },
+                        colors: ['#ff4d6d', '#ffb703', '#ff8fa3', '#ffffff', '#c77dff'],
+                        shapes: ['circle', 'square']
+                    });
+                    setTimeout(() => {
+                        confetti({
+                            particleCount: 80,
+                            angle: 60,
+                            spread: 55,
+                            origin: { x: 0, y: 0 }
+                        });
+                        confetti({
+                            particleCount: 80,
+                            angle: 120,
+                            spread: 55,
+                            origin: { x: 1, y: 0 }
+                        });
+                    }, 400);
+                }
             }
         }
 
@@ -961,27 +940,8 @@
             confetti({ particleCount: 50, spread: 60 });
             document.getElementById('gift-status').style.opacity = '1';
             setTimeout(() => {
-                nextScreen('screen-4');
+                nextScreen('poetry-2');
             }, 1500);
-        }
-
-        /* FIXED VIDEO PLAYER CONTROLS */
-        function playVideo() {
-            const video = document.getElementById('birthday-video');
-            const overlay = document.getElementById('video-overlay');
-            
-            video.load();
-            let playPromise = video.play();
-
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    overlay.style.display = 'none';
-                }).catch(error => {
-                    console.log("Autoplay was prevented, allowing manual play controls.");
-                    overlay.style.display = 'none';
-                    video.controls = true;
-                });
-            }
         }
 
         /* LOVE LETTER ENVELOPE */
